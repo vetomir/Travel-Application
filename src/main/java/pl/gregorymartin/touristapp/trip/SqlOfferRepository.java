@@ -1,8 +1,8 @@
-package pl.gregorymartin.touristapp.places;
+package pl.gregorymartin.touristapp.trip;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SqlCountryRepository extends JpaRepository<Country,Long> {
+interface SqlOfferRepository extends JpaRepository<Offer, Long> {
 }

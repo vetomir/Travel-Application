@@ -1,8 +1,8 @@
-package pl.gregorymartin.touristapp.places;
+package pl.gregorymartin.touristapp.place;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SqlCityRepository extends JpaRepository<City,Long> {
+interface SqlCityRepository extends JpaRepository<City, Long> {
 }
