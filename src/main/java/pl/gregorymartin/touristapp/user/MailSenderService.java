@@ -10,7 +10,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public
 class MailSenderService {
     private final JavaMailSender javaMailSender;
 

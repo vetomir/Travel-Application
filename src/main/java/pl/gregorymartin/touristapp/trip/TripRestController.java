@@ -13,11 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/trips")
-class TripController {
-    private final TripService tripService;
+class TripRestController {
+    private final TripService tripServiceImpl;
 
-    TripController(final TripService tripService) {
-        this.tripService = tripService;
+    TripRestController(final TripService tripServiceImpl) {
+        this.tripServiceImpl = tripServiceImpl;
     }
 
     @GetMapping("/offers/list")
@@ -27,7 +27,7 @@ class TripController {
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
         String sortByVariable = sortBy != null ? sortBy : "id";
 
-        return ResponseEntity.ok(tripService.getAllOffers(pageNumber, sortDirection, sortByVariable, 25));
+        return ResponseEntity.ok(tripServiceImpl.getAllOffers(pageNumber, sortDirection, sortByVariable, 25));
     }
 
     @GetMapping("/bookings/list")
@@ -37,60 +37,60 @@ class TripController {
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
         String sortByVariable = sortBy != null ? sortBy : "id";
 
-        return ResponseEntity.ok(tripService.getAllBookings(pageNumber, sortDirection, sortByVariable, 25));
+        return ResponseEntity.ok(tripServiceImpl.getAllBookings(pageNumber, sortDirection, sortByVariable, 25));
     }
 
     @GetMapping("/offers")
     public ResponseEntity<OfferReadModel> readOffer(@RequestParam long id/*, @RequestParam(name = "user-id") long userId*/) {
-        OfferReadModel offerReadModel = tripService.getOfferById(id);
+        OfferReadModel offerReadModel = tripServiceImpl.getOfferById(id);
         return ResponseEntity.ok(offerReadModel);
     }
 
     @GetMapping("/bookings")
     public ResponseEntity<BookingReadModel> readBooking(@RequestParam long id/*, @RequestParam(name = "user-id") long userId*/) {
-        BookingReadModel bookingReadModel = tripService.getBookingById(id);
+        BookingReadModel bookingReadModel = tripServiceImpl.getBookingById(id);
         return ResponseEntity.ok(bookingReadModel);
     }
 
     @PostMapping("/offers")
     public ResponseEntity<OfferReadModel> createOffer(@RequestBody OfferWriteModel offerWriteModel/*, @RequestParam(name = "user-id") long userId*/) {
-        OfferReadModel offerReadModel = tripService.addOffer(offerWriteModel);
+        OfferReadModel offerReadModel = tripServiceImpl.addOffer(offerWriteModel);
         return ResponseEntity.created(URI.create("/" + offerReadModel.getId())).body(offerReadModel);
     }
 
     @PostMapping("/bookings")
     public ResponseEntity<BookingReadModel> createBooking(@RequestBody BookingWriteModel bookingWriteModel/*, @RequestParam(name = "user-id") long userId*/) {
-        BookingReadModel bookingReadModel = tripService.addBooking(bookingWriteModel);
+        BookingReadModel bookingReadModel = tripServiceImpl.addBooking(bookingWriteModel);
         return ResponseEntity.created(URI.create("/" + bookingReadModel.getId())).body(bookingReadModel);
     }
 
     @PatchMapping("/offers")
     public ResponseEntity<OfferReadModel> updateOffer(@RequestParam long id, @RequestBody OfferWriteModel offerWriteModel/*, @RequestParam(name = "user-id") long userId*/) {
-        OfferReadModel offerReadModel = tripService.modifyOffer(id, offerWriteModel);
+        OfferReadModel offerReadModel = tripServiceImpl.modifyOffer(id, offerWriteModel);
         return ResponseEntity.created(URI.create("/" + offerReadModel.getId())).body(offerReadModel);
     }
 
     @PatchMapping("/bookings")
     public ResponseEntity<BookingReadModel> updateBooking(@RequestParam long id, @RequestBody BookingWriteModel bookingWriteModel/*, @RequestParam(name = "user-id") long userId*/) {
-        BookingReadModel bookingReadModel = tripService.modifyBooking(id, bookingWriteModel);
+        BookingReadModel bookingReadModel = tripServiceImpl.modifyBooking(id, bookingWriteModel);
         return ResponseEntity.created(URI.create("/" + bookingReadModel.getId())).body(bookingReadModel);
     }
 
     @PatchMapping("/bookings/pay")
     public ResponseEntity<BookingReadModel> payBooking(@RequestParam long id/*, @RequestParam(name = "user-id") long userId*/) {
-        BookingReadModel bookingReadModel = tripService.setPaid(id);
+        BookingReadModel bookingReadModel = tripServiceImpl.setPaid(id);
         return ResponseEntity.created(URI.create("/" + bookingReadModel.getId())).body(bookingReadModel);
     }
 
     @DeleteMapping("/offers")
     public ResponseEntity deleteOffer(@RequestParam long id) {
-        tripService.deleteOffer(id);
+        tripServiceImpl.deleteOffer(id);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/bookings")
     public ResponseEntity deleteBooking(@RequestParam long id) {
-        tripService.deleteBooking(id);
+        tripServiceImpl.deleteBooking(id);
         return ResponseEntity.noContent().build();
     }
 }

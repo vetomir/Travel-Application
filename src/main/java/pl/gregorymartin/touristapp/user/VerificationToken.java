@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-public
 class VerificationToken {
 
     @Id

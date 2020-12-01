@@ -12,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/places")
-class PlaceController {
+class PlaceRestController {
     private final PlaceService placeService;
 
-    PlaceController(final PlaceService placeService) {
+    PlaceRestController(final PlaceService placeService) {
         this.placeService = placeService;
     }
 

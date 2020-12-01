@@ -7,20 +7,17 @@ import lombok.Setter;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-@Builder
 @Getter
 @Setter
+@Builder
 public
-class OfferReadModel {
-    private long id;
-
+class OfferMvcHomepage {
     private String departureCityName;
     private ZonedDateTime departureTime;
     private String arrivingCityName;
-    private ZonedDateTime arrivingTime;
+    private String arrivingCityPhotoUrl;
 
-    private int capacity;
     private double price;
 
-    private List<BookingReadModel> bookings;
+
 }

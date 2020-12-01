@@ -5,6 +5,7 @@ import lombok.Setter;
 import pl.gregorymartin.touristapp.user.AppUser;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "bookings")
@@ -29,7 +30,11 @@ class Booking {
     @JoinColumn(name = "app_user_id", updatable = false)
     private AppUser appUser;
 
-    Booking() {
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id",  insertable = false)
+    private List<Comment> comments;
+
+    public Booking() {
         paid = false;
     }
 }

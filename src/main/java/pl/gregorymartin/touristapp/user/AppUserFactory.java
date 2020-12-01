@@ -1,11 +1,8 @@
 package pl.gregorymartin.touristapp.user;
 
-import org.springframework.data.domain.Page;
-import pl.gregorymartin.touristapp.trip.BookingFactory;
 import pl.gregorymartin.touristapp.user.dto.UserReadModel;
 import pl.gregorymartin.touristapp.user.dto.UserWriteModel;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

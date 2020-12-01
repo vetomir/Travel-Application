@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Primary
-public class UserDetailsServiceImpl implements UserDetailsService {
+class UserDetailsServiceImpl implements UserDetailsService {
     Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
-    private SqlAppUserRepository repository;
+    private AppUserRepository repository;
 
-    public UserDetailsServiceImpl(final SqlAppUserRepository repository) {
+    public UserDetailsServiceImpl(final AppUserRepository repository) {
         this.repository = repository;
     }
 

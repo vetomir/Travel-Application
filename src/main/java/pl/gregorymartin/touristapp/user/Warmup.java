@@ -12,6 +12,7 @@ import java.util.List;
 class Warmup implements ApplicationListener<ContextRefreshedEvent> {
     private final AppUserService appUserService;
 
+
     Warmup(final AppUserService appUserService) {
         this.appUserService = appUserService;
     }
@@ -25,12 +26,14 @@ class Warmup implements ApplicationListener<ContextRefreshedEvent> {
     private void putUsers() {
         List<UserWriteModel> users = new ArrayList<>();
 
-        users.add(new UserWriteModel("stach","Stanisław","Kowalski", "abc123","abc123"));
-        users.add(new UserWriteModel("stachsaa","Stanisław","Kowalski", "abc123","abc123"));
+        users.add(new UserWriteModel("staszex","Tytus","Kowalski", "abc123","abc123"));
+        users.add(new UserWriteModel("romex","Romek","Iksiński", "abc123","abc123"));
+        users.add(new UserWriteModel("atomex","Atomek","Oppenheimer", "abc123","abc123"));
 
-        users.forEach(appUserService::registerUser);
+        users.forEach(appUserService::createAppUser);
 
         appUserService.toggleRole(2L);
     }
+
 
 }

@@ -6,10 +6,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.gregorymartin.touristapp.trip.Booking;
+import pl.gregorymartin.touristapp.trip.Comment;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,6 +37,10 @@ class AppUser implements UserDetails {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "app_user_id",  insertable = false)
     Set<Booking> bookings = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "app_user_id")
+    private List<Comment> comments;
 
     public AppUser() {
         role = Role.ROLE_USER;

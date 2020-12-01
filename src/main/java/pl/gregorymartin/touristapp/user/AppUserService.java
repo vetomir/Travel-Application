@@ -1,141 +1,34 @@
 package pl.gregorymartin.touristapp.user;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pl.gregorymartin.touristapp.user.dto.UserReadModel;
 import pl.gregorymartin.touristapp.user.dto.UserWriteModel;
 
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
-class AppUserService {
-    private final SqlAppUserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final MailSenderService mailSenderService;
-    private final SqlVerificationTokenRepository verificationTokenRepository;
+public
+interface AppUserService {
 
-    AppUserService(final SqlAppUserRepository userRepository, final PasswordEncoder passwordEncoder, final MailSenderService mailSenderService, final SqlVerificationTokenRepository verificationTokenRepository) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.mailSenderService = mailSenderService;
-        this.verificationTokenRepository = verificationTokenRepository;
-    }
+    List<UserReadModel> getAllAppUsers(int page, Sort.Direction sort, String sortBy, int items);
 
-    List<UserReadModel> getAllUsers(int page, Sort.Direction sort, String sortBy, int items){
-        List<AppUser> users = userRepository.findAll(
-                PageRequest.of(page, items,
-                        Sort.by(sort, sortBy)
-                )).getContent();
-        return AppUserFactory.toDto(users);
-    }
+    UserReadModel getAppUserById(long id);
 
-    public AppUser createToken(AppUser appUser, HttpServletRequest request){
-        //
-        String token = UUID.randomUUID().toString();
+    UserReadModel registerAppUser(UserWriteModel userWriteModel, HttpServletRequest request);
 
-        VerificationToken verificationToken = new VerificationToken(token,appUser);
-        verificationTokenRepository.save(verificationToken);
+    AppUser createAppUser(UserWriteModel userWriteModel);
 
-        String url = "http://" +
-                request.getServerName() +
-                ":" + request.getServerPort() +
-                request.getContextPath() +
-                "/verify-token?token=" + token;
+    AppUser createToken(AppUser appUser, HttpServletRequest request);
 
-        try {
-            mailSenderService.sendMail(
-                    appUser.getUsername(), "Verification Token", url, false);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+    void verifyToken(final String token);
 
-        return appUser;
-    }
+    UserReadModel toggleRole(long id);
 
-    public void verifyToken(final String token) {
-        AppUser appUser = verificationTokenRepository.findByValue(token).getUser();
-        appUser.toggleEnable();
-        userRepository.save(appUser);
-    }
+    UserReadModel modifyAppUser(long id, UserWriteModel userWriteModel);
 
-    public UserReadModel registerUser(UserWriteModel userWriteModel){
-        Optional<AppUser> byUsername = Optional.ofNullable(userRepository.findAllByUsername(userWriteModel.getUsername()));
-        if(byUsername.isPresent()){
-            throw new IllegalArgumentException("User with these username (email address) is already exist");
-        }
-        else{
-            AppUser result = AppUserFactory.toEntity(userWriteModel);
-            result.setPassword(passwordEncoder.encode(userWriteModel.getPassword()));
+    UserReadModel changePhoto(long id, String photoUrl);
 
-            return AppUserFactory.toDto(userRepository.save(result));
-        }
-    }
-    @Transactional
-    public UserReadModel toggleRole(long id){
-        Optional<AppUser> appUser = userRepository.findById(id);
-
-        if(appUser.isEmpty()){
-            throw new IllegalArgumentException("User is not present");
-        }
-
-        if(appUser.get().getRole() == Role.ROLE_USER){
-            appUser.get().setRole(Role.ROLE_ADMIN);
-        }
-        else if(appUser.get().getRole() == Role.ROLE_ADMIN){
-            appUser.get().setRole(Role.ROLE_USER);
-        }
-
-        return AppUserFactory.toDto(
-                userRepository.save(appUser.get())
-        );
-    }
-    @Transactional
-    public UserReadModel modifyUser(long id, UserWriteModel userWriteModel){
-        Optional<AppUser> appUser = userRepository.findById(id);
-        if(appUser.isEmpty()){
-            throw new IllegalArgumentException("User is not present");
-        }
-        if(!appUser.get().getUsername().equals(userWriteModel.getUsername())){
-            Optional<AppUser> allByUsername =  Optional.ofNullable(userRepository.findAllByUsername(userWriteModel.getUsername()));
-            if(allByUsername.isPresent()){
-                throw new IllegalArgumentException("User with this email is already exists");
-            }
-
-        }
-        appUser.get().setUsername(userWriteModel.getUsername());
-        appUser.get().setName(userWriteModel.getName());
-        appUser.get().setSurname(userWriteModel.getSurname());
-        appUser.get().setPassword(userWriteModel.getPassword());
-
-        return AppUserFactory.toDto(
-                userRepository.save(appUser.get())
-        );
-    }
-    @Transactional
-    public UserReadModel changePhoto(long id, String photoUrl){
-        Optional<AppUser> appUser = userRepository.findById(id);
-        if(appUser.isEmpty()){
-            throw new IllegalArgumentException("User is not present");
-        }
-
-        appUser.get().setPhotoUrl(photoUrl);
-
-        return AppUserFactory.toDto(
-                userRepository.save(appUser.get())
-        );
-    }
-    public void deleteUser(long id){
-
-        userRepository.deleteById(id);
-
-    }
-
-
+    public void deleteUser(long id);
 }

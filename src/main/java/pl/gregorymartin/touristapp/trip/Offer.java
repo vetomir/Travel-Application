@@ -21,6 +21,7 @@ class Offer {
     private ZonedDateTime departureTime;
 
     private String arrivingCityName;
+    private String arrivingCityPhotoUrl;
     private ZonedDateTime arrivingTime;
 
     private int capacity;

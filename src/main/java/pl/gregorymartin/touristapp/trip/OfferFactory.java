@@ -1,14 +1,11 @@
 package pl.gregorymartin.touristapp.trip;
 
-import pl.gregorymartin.touristapp.trip.dto.BookingReadModel;
-import pl.gregorymartin.touristapp.trip.dto.BookingWriteModel;
+import pl.gregorymartin.touristapp.trip.dto.OfferMvcHomepage;
 import pl.gregorymartin.touristapp.trip.dto.OfferReadModel;
 import pl.gregorymartin.touristapp.trip.dto.OfferWriteModel;
-import pl.gregorymartin.touristapp.user.AppUser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 class OfferFactory {
@@ -49,6 +46,23 @@ class OfferFactory {
                 .capacity(offer.getCapacity())
                 .price(offer.getPrice())
                 .bookings(BookingFactory.toDto(new ArrayList<>(offer.getBookings())))
+                .build();
+    }
+
+    //
+    public static List<OfferMvcHomepage> toMvcDto(List<Offer> offer) {
+        return offer.stream()
+                .map(OfferFactory::toMvcDto)
+                .collect(Collectors.toList());
+    }
+
+    public static OfferMvcHomepage toMvcDto(Offer offer) {
+        return OfferMvcHomepage.builder()
+                .departureCityName(offer.getDepartureCityName())
+                .departureTime(offer.getDepartureTime())
+                .arrivingCityName(offer.getArrivingCityName())
+                .arrivingCityPhotoUrl(offer.getArrivingCityPhotoUrl())
+                .price(offer.getPrice())
                 .build();
     }
 }

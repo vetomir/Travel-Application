@@ -2,9 +2,6 @@ package pl.gregorymartin.touristapp.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.gregorymartin.touristapp.trip.dto.BookingReadModel;
-
-import java.util.List;
 
 @Setter
 @Getter
@@ -25,5 +22,9 @@ class UserWriteModel {
         this.surname = surname;
         this.password = password;
         this.password2 = password2;
+    }
+
+    public UserWriteModel() {
+
     }
 }
