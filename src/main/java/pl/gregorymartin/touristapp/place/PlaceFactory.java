@@ -19,7 +19,9 @@ class PlaceFactory {
     public static City toEntity(CityWriteModel cityWriteModel) {
         City city = new City();
         city.setName(cityWriteModel.getName());
-        city.setPhotoUrl(cityWriteModel.getPhotoUrl());
+        if(!cityWriteModel.getPhotoUrl().isBlank()){
+            city.setPhotoUrl(cityWriteModel.getPhotoUrl());
+        }
         city.setCountry(new Country(cityWriteModel.getCountry()));
 
         return city;

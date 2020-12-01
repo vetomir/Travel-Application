@@ -4,9 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.ZonedDateTime;
-
-@Builder
 @Getter
 @Setter
 public
@@ -14,5 +11,11 @@ class BookingWriteModel {
     private long offerId;
 
     private long userId;
-    private int amount;
+    private int size;
+
+    public BookingWriteModel(final long offerId, final long userId, final int size) {
+        this.offerId = offerId;
+        this.userId = userId;
+        this.size = size;
+    }
 }

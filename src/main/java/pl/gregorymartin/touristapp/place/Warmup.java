@@ -30,7 +30,7 @@ class Warmup implements ApplicationListener<ContextRefreshedEvent> {
         cities.add(new CityWriteModel("Warsaw","","Poland"));
         cities.add(new CityWriteModel("Cracow","","Poland"));
         cities.add(new CityWriteModel("Wroclaw","","Poland"));
-        cities.add(new CityWriteModel("Poznan","","Poland"));
+        cities.add(new CityWriteModel("Poznan","asf","Poland"));
         cities.add(new CityWriteModel("Madrid","","Spain"));
         cities.add(new CityWriteModel("Barcelona","","Spain"));
         cities.add(new CityWriteModel("London","","Great Britain"));
@@ -40,6 +40,6 @@ class Warmup implements ApplicationListener<ContextRefreshedEvent> {
         cities.add(new CityWriteModel("Stockholm","","Sweden"));
         cities.add(new CityWriteModel("Norway","","Oslo"));
 
-        cities.stream().forEach(placeService::addCity);
+        cities.forEach(placeService::addCity);
     }
 }

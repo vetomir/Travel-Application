@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface SqlCityRepository extends JpaRepository<City, Long> {
+interface SqlCityRepository extends CityRepository, JpaRepository<City, Long> {
 }

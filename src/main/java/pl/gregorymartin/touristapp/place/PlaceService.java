@@ -14,8 +14,8 @@ import java.util.Optional;
 @Service
 class PlaceService {
     private static final int PAGE_SIZE = 25;
-    private final SqlCityRepository cityRepository;
-    private final SqlCountryRepository countryRepository;
+    private final CityRepository cityRepository;
+    private final CountryRepository countryRepository;
 
     PlaceService(final SqlCityRepository cityRepository, final SqlCountryRepository countryRepository) {
         this.cityRepository = cityRepository;
@@ -83,7 +83,7 @@ class PlaceService {
         throw new IllegalArgumentException("City with is not presents");
     }
 
-    boolean deleteCity(long id){
+    void deleteCity(long id){
         Optional<City> cityById = cityRepository.findById(id);
         if(cityById.isPresent()){
             Country countryByName = countryRepository.findByName(cityById.get().getCountry().getName()).get();
@@ -91,8 +91,6 @@ class PlaceService {
                 countryRepository.deleteById(countryByName.getId());
             }
             cityRepository.delete(cityById.get());
-
-            return true;
         }
         throw new IllegalArgumentException("City with this id is not presents");
     }

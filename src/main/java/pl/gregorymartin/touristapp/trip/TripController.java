@@ -76,6 +76,12 @@ class TripController {
         return ResponseEntity.created(URI.create("/" + bookingReadModel.getId())).body(bookingReadModel);
     }
 
+    @PatchMapping("/bookings/pay")
+    public ResponseEntity<BookingReadModel> payBooking(@RequestParam long id/*, @RequestParam(name = "user-id") long userId*/) {
+        BookingReadModel bookingReadModel = tripService.setPaid(id);
+        return ResponseEntity.created(URI.create("/" + bookingReadModel.getId())).body(bookingReadModel);
+    }
+
     @DeleteMapping("/offers")
     public ResponseEntity deleteOffer(@RequestParam long id) {
         tripService.deleteOffer(id);

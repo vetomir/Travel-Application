@@ -17,14 +17,19 @@ class Booking {
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "booking_id", updatable = false)
+    @JoinColumn(name = "offer_id", updatable = false)
     private Offer offer;
 
-    private int amount;
+    private int size;
     private double price;
+
+    private boolean paid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "app_user_id", updatable = false)
     private AppUser appUser;
 
+    Booking() {
+        paid = false;
+    }
 }

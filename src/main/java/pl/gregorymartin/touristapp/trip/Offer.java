@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -15,15 +16,19 @@ class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String departureCityName;
     private ZonedDateTime departureTime;
+
     private String arrivingCityName;
     private ZonedDateTime arrivingTime;
+
     private int capacity;
     private double price;
 
-    @OneToMany
-    Set<Booking> bookings;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "offer_id",  insertable = false)
+    Set<Booking> bookings = new HashSet<>();
 
     Offer() {
     }

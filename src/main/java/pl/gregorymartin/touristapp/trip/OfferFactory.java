@@ -6,47 +6,10 @@ import pl.gregorymartin.touristapp.trip.dto.OfferReadModel;
 import pl.gregorymartin.touristapp.trip.dto.OfferWriteModel;
 import pl.gregorymartin.touristapp.user.AppUser;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-
-class BookingFactory {
-
-    public static List<Booking> toEntity(List<BookingWriteModel> bookingWriteModels) {
-        return bookingWriteModels.stream()
-                .map(BookingFactory::toEntity)
-                .collect(Collectors.toList());
-    }
-
-    public static Booking toEntity(BookingWriteModel bookingWriteModel) {
-        Booking booking = new Booking();
-        booking.setAppUser(new AppUser(bookingWriteModel.getUserId()));
-        booking.setOffer(new Offer(bookingWriteModel.getOfferId()));
-        booking.setAmount(bookingWriteModel.getAmount());
-
-        return booking;
-    }
-
-    //read
-
-    public static List<BookingReadModel> toDto(List<Booking> bookings) {
-        return bookings.stream()
-                .map(BookingFactory::toDto)
-                .collect(Collectors.toList());
-    }
-
-    public static BookingReadModel toDto(Booking bookings) {
-        return BookingReadModel.builder()
-                .id(bookings.getId())
-                .arrivingCityName(bookings.getOffer().getArrivingCityName())
-                .arrivingTime(bookings.getOffer().getArrivingTime())
-                .departureCityName(bookings.getOffer().getDepartureCityName())
-                .departureTime(bookings.getOffer().getDepartureTime())
-                .amount(bookings.getAmount())
-                .price(bookings.getPrice())
-                .username(bookings.getAppUser().getUsername())
-                .build();
-    }
-}
 
 class OfferFactory {
 
@@ -85,7 +48,7 @@ class OfferFactory {
                 .departureTime(offer.getDepartureTime())
                 .capacity(offer.getCapacity())
                 .price(offer.getPrice())
-                //.bookings(BookingFactory.toDto((List<Booking>) offer.getBookings()))
+                .bookings(BookingFactory.toDto(new ArrayList<>(offer.getBookings())))
                 .build();
     }
 }

@@ -1,12 +1,10 @@
 package pl.gregorymartin.touristapp.trip.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.ZonedDateTime;
 
-@Builder
 @Getter
 @Setter
 public
@@ -18,4 +16,14 @@ class OfferWriteModel {
 
     private int capacity;
     private double price;
+
+
+    public OfferWriteModel(final String departureCityName, final ZonedDateTime departureTime, final String arrivingCityName, final ZonedDateTime arrivingTime, final int capacity, final double price) {
+        this.departureCityName = departureCityName;
+        this.departureTime = departureTime;
+        this.arrivingCityName = arrivingCityName;
+        this.arrivingTime = arrivingTime;
+        this.capacity = capacity;
+        this.price = price;
+    }
 }
