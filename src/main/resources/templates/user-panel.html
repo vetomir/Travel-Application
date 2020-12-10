@@ -101,7 +101,7 @@
 
             <div class="user-header" uk-parallax="bgy: -200">
                 <div class="user-header-bg"></div>
-                <img src="https://images.unsplash.com/photo-1550591541-a7af89544766?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80">
+                <img src="https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80">
                 <h1 th:text="|Welcome ${user.name}!|"></h1>
                 <div class="user-details">
                     <div class="user-avatar">
@@ -117,48 +117,76 @@
             <div id="user-booking-content">
                 <div id="user-booking-page">
                     <!--/*@thymesVar id="project" type="pl.gregorymartin.touristapp.trip.dto.OfferSearch"*/-->
-                    <div th:each="offer : ${bookings}">
+                    <div th:each="booking : ${futureBookings}">
                         <div class="content-bg">
                             <div class="content-bg-shadow"></div>
-                            <img  th:src="${offer.photoUrl}">
+                            <img  th:src="${booking.photoUrl}">
                         </div>
                         <div class="content">
                             <div class="location" >
-                                <p th:text="|${offer.getDepartureCityName()} to |">from</p>
-                                <p th:text="| ${offer.getArrivingCityName()}|">to</p>
+                                <p th:text="|${booking.getDepartureCityName()} to |">from</p>
+                                <p th:text="| ${booking.getArrivingCityName()}|">to</p>
                             </div>
 
                             <div class="dates">
                                 <div class="date">
-                                    <p th:text="${offer.departureTimeDate()}">dep date</p>
-                                    <h2 th:text="${offer.departureTimeHour()}">dep time</h2>
+                                    <p th:text="${booking.departureTimeDate()}">dep date</p>
+                                    <h2 th:text="${booking.departureTimeHour()}">dep time</h2>
                                 </div>
                                 <!--<p class="days" th:text="|${offer.getDays()} DAYS|">days</p>-->
                                 <div class="date">
-                                    <p th:text="${offer.arrivingTimeDate()}">arr date</p>
-                                    <h2 th:text="${offer.arrivingTimeHour()}">arr time</h2>
+                                    <p th:text="${booking.arrivingTimeDate()}">arr date</p>
+                                    <h2 th:text="${booking.arrivingTimeHour()}">arr time</h2>
                                 </div>
                             </div>
                             <div class="people">
-                                <h2 th:text="|${offer.size} persons|">number of people</h2>
+                                <h2 th:text="|${booking.size} persons|">number of people</h2>
                             </div>
-                            <span class="price" th:text="|${offer.getPrice()}$|">from 700$</span>
+                            <span class="price" th:text="|${booking.getPrice()}$|">from 700$</span>
                         </div>
-                        <p th:if="${offer.paid}" class="paid" uk-icon="icon: check">PAID</p>
-                        <a th:if="${!offer.paid}" class="unpaid" th:href="|#offcanvas-pay${offer.id}|" uk-toggle uk-icon="icon: close">UNPAID</a>
-                        <div th:id="|offcanvas-pay${offer.id}|" uk-modal>
+                        <p th:if="${booking.paid}" class="paid" uk-icon="icon: check">PAID</p>
+                        <a th:if="${!booking.paid}" class="unpaid" th:href="|#offcanvas-pay${booking.id}|" uk-toggle uk-icon="icon: close">UNPAID</a>
+                        <div th:id="|offcanvas-pay${booking.id}|" uk-modal>
 
-                            <form class="form uk-modal-dialog uk-modal-body" action="#" th:action="|@{/booking/pay/}${offer.id}|" method="post">
+                            <form class="form uk-modal-dialog uk-modal-body" action="#" th:action="|@{/booking/pay/}${booking.id}|" method="post">
                                 <button class="uk-modal-close-default" type="button" uk-close></button>
                                 <button type="submit" class="login">Pay</button>
                             </form>
                         </div>
 
                     </div>
-                </div>
-                <div class="nav">
-                    <a>Past Travels</a>
-                    <a>Edit Details</a>
+
+                    <h1 id="history">History</h1>
+
+                    <div class="history" th:each="booking : ${pastBookings}">
+                        <div class="content-bg dark">
+                            <div class="content-bg-shadow"></div>
+                            <img th:src="${booking.photoUrl}">
+                        </div>
+                        <div class="content">
+                            <div class="location" >
+                                <p th:text="|${booking.getDepartureCityName()} to |">from</p>
+                                <p th:text="| ${booking.getArrivingCityName()}|">to</p>
+                            </div>
+
+                            <div class="dates">
+                                <div class="date">
+                                    <p th:text="${booking.departureTimeDate()}">dep date</p>
+                                    <h2 th:text="${booking.departureTimeHour()}">dep time</h2>
+                                </div>
+                                <!--<p class="days" th:text="|${offer.getDays()} DAYS|">days</p>-->
+                                <div class="date">
+                                    <p th:text="${booking.arrivingTimeDate()}">arr date</p>
+                                    <h2 th:text="${booking.arrivingTimeHour()}">arr time</h2>
+                                </div>
+                            </div>
+                            <div class="people">
+                                <h2 th:text="|${booking.size} persons|">number of people</h2>
+                            </div>
+                            <a class="review" uk-icon="icon: file-edit" th:href="|@{/booking/review/}${booking.id}|"> REVIEW </a>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 

@@ -1,9 +1,12 @@
 package pl.gregorymartin.touristapp.trip;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.expression.Lists;
 import pl.gregorymartin.touristapp.trip.dto.CommentReadModel;
 import pl.gregorymartin.touristapp.trip.dto.CommentUserPanel;
 import pl.gregorymartin.touristapp.trip.dto.CommentWriteModel;
@@ -19,6 +22,7 @@ class CommentService {
     private final SqlCommentRepository commentRepository;
     private final SqlOfferRepository offerRepository;
     private final AppUserRepository appUserRepository;
+    private final Logger  logger = LoggerFactory.getLogger(CommentService.class);
 
     CommentService(final SqlCommentRepository commentRepository, final SqlOfferRepository offerRepository, final AppUserRepository appUserRepository) {
         this.commentRepository = commentRepository;
@@ -42,6 +46,31 @@ class CommentService {
 
         return CommentFactory.toDto(comment.get());
     }
+    public List<Comment> getCommentByUser(long id){
+        List<Comment> comment = commentRepository.findCommentsByUser(id);
+        if (comment.isEmpty()){
+            throw new IllegalArgumentException("Comments of this User are not presents");
+        }
+
+        return comment;
+    }
+    public List<Comment> getCommentByOffer(long id){
+        List<Comment> comment = commentRepository.findCommentsByOffer(id);
+        if (comment.isEmpty()){
+            throw new IllegalArgumentException("Comments of this Offer are not presents");
+        }
+
+        return comment;
+    }
+    public CommentReadModel getCommentByUserAndOffer(long userId, long offerId){
+        Optional<Comment> comment = commentRepository.findCommentByUserAndOffer(userId, offerId);
+        if (comment.isEmpty()){
+            throw new IllegalArgumentException("Comment is not presents");
+        }
+
+        return CommentFactory.toDto(comment.get());
+    }
+
     @Transactional
     public CommentReadModel addComment(CommentWriteModel commentWriteModel){
         Comment comment = CommentFactory.toEntity(commentWriteModel);
@@ -55,6 +84,8 @@ class CommentService {
         }
         comment.setAppUser(appUser.get());
         comment.setOffer(offer.get());
+
+        logger.info("Add review of {} {}", commentWriteModel.getUserId() , appUser.get().getId());
 
         return CommentFactory.toDto(commentRepository.save(comment));
     }

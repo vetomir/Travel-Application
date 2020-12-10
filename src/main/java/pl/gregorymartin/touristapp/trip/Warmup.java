@@ -35,29 +35,43 @@ class Warmup implements ApplicationListener<ContextRefreshedEvent> {
         List<OfferWriteModel> offers = new ArrayList<>();
 
 
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Wroclaw",ZonedDateTime.now(),20,15.00));
-        offers.add( new OfferWriteModel("Poznan", ZonedDateTime.now(),"Cracow",ZonedDateTime.now(),20,19.99));
-        offers.add( new OfferWriteModel("Warsaw", ZonedDateTime.now(),"Moscow",ZonedDateTime.now(),20,54.99));
-        offers.add( new OfferWriteModel("Oslo", ZonedDateTime.now(),"Paris",ZonedDateTime.now(),20,80.00));
-        offers.add( new OfferWriteModel("Paris", ZonedDateTime.now(),"Oslo",ZonedDateTime.now(),20,40.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Warsaw",ZonedDateTime.now(),20,14.99));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,14,2,20), ZoneId.of("UTC")),20,70.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2022, Month.MARCH,2,2,20), ZoneId.of("UTC")),20,70.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2022, Month.JULY,2,2,20), ZoneId.of("UTC")),20,70.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2022, Month.JUNE,2,2,20), ZoneId.of("UTC")),20,70.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2023, Month.APRIL,2,2,20), ZoneId.of("UTC")),20,70.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2025, Month.JULY,2,2,20), ZoneId.of("UTC")),20,70.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,15,2,20), ZoneId.of("UTC")),20,70.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2026, Month.MARCH,2,2,20), ZoneId.of("UTC")),20,70.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2030, Month.MARCH,2,2,20), ZoneId.of("UTC")),20,70.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2024, Month.MARCH,2,2,20), ZoneId.of("UTC")),20,70.00));
-        offers.add( new OfferWriteModel("London", ZonedDateTime.now(),"Paris",ZonedDateTime.now(),20,24.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Wroclaw",ZonedDateTime.now(),20,15.00));
-        offers.add( new OfferWriteModel("Poznan", ZonedDateTime.now(),"Cracow",ZonedDateTime.now(),20,19.99));
-        offers.add( new OfferWriteModel("Warsaw", ZonedDateTime.now(),"Moscow",ZonedDateTime.now(),20,54.99));
-        offers.add( new OfferWriteModel("Oslo", ZonedDateTime.now(),"Paris",ZonedDateTime.now(),20,80.00));
-        offers.add( new OfferWriteModel("Paris", ZonedDateTime.now(),"Oslo",ZonedDateTime.now(),20,40.00));
-        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.now(),"Warsaw",ZonedDateTime.now(),20,14.99));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2019, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Oslo",ZonedDateTime.of(LocalDateTime.of(2019, Month.APRIL,15,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2016, Month.MARCH,2,2,20), ZoneId.of("UTC")),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2016, Month.MARCH,11,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Oslo", ZonedDateTime.of(LocalDateTime.of(2012, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Moscow",ZonedDateTime.of(LocalDateTime.of(2012, Month.APRIL,9,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2014, Month.MARCH,2,2,20), ZoneId.of("UTC")),"London",ZonedDateTime.of(LocalDateTime.of(2014, Month.MARCH,22,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2020, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Barcelona",ZonedDateTime.of(LocalDateTime.of(2020, Month.APRIL,2,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Madrid",ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,16,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Warsaw", ZonedDateTime.of(LocalDateTime.of(2015, Month.MAY,2,2,20), ZoneId.of("UTC")),"Cracow",ZonedDateTime.of(LocalDateTime.of(2015, Month.MAY,7,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2011, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Oslo",ZonedDateTime.of(LocalDateTime.of(2011, Month.APRIL,12,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2030, Month.MARCH,2,2,20), ZoneId.of("UTC")),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2030, Month.MARCH,21,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2019, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Oslo",ZonedDateTime.of(LocalDateTime.of(2019, Month.APRIL,15,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2016, Month.MARCH,2,2,20), ZoneId.of("UTC")),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2016, Month.MARCH,11,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Oslo", ZonedDateTime.of(LocalDateTime.of(2012, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Moscow",ZonedDateTime.of(LocalDateTime.of(2012, Month.APRIL,9,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2014, Month.MARCH,2,2,20), ZoneId.of("UTC")),"London",ZonedDateTime.of(LocalDateTime.of(2014, Month.MARCH,22,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2020, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Barcelona",ZonedDateTime.of(LocalDateTime.of(2020, Month.APRIL,2,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Madrid",ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,16,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Warsaw", ZonedDateTime.of(LocalDateTime.of(2015, Month.MAY,2,2,20), ZoneId.of("UTC")),"Cracow",ZonedDateTime.of(LocalDateTime.of(2015, Month.MAY,7,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2011, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Oslo",ZonedDateTime.of(LocalDateTime.of(2011, Month.APRIL,12,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2030, Month.MARCH,2,2,20), ZoneId.of("UTC")),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2030, Month.MARCH,21,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2019, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Oslo",ZonedDateTime.of(LocalDateTime.of(2019, Month.APRIL,15,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2016, Month.MARCH,2,2,20), ZoneId.of("UTC")),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2016, Month.MARCH,11,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Oslo", ZonedDateTime.of(LocalDateTime.of(2012, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Moscow",ZonedDateTime.of(LocalDateTime.of(2012, Month.APRIL,9,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2014, Month.MARCH,2,2,20), ZoneId.of("UTC")),"London",ZonedDateTime.of(LocalDateTime.of(2014, Month.MARCH,22,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2020, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Barcelona",ZonedDateTime.of(LocalDateTime.of(2020, Month.APRIL,2,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Madrid",ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,16,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Warsaw", ZonedDateTime.of(LocalDateTime.of(2015, Month.MAY,2,2,20), ZoneId.of("UTC")),"Cracow",ZonedDateTime.of(LocalDateTime.of(2015, Month.MAY,7,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2011, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Oslo",ZonedDateTime.of(LocalDateTime.of(2011, Month.APRIL,12,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2030, Month.MARCH,2,2,20), ZoneId.of("UTC")),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2030, Month.MARCH,21,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2019, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Oslo",ZonedDateTime.of(LocalDateTime.of(2019, Month.APRIL,15,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2016, Month.MARCH,2,2,20), ZoneId.of("UTC")),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2016, Month.MARCH,11,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Oslo", ZonedDateTime.of(LocalDateTime.of(2012, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Moscow",ZonedDateTime.of(LocalDateTime.of(2012, Month.APRIL,9,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2014, Month.MARCH,2,2,20), ZoneId.of("UTC")),"London",ZonedDateTime.of(LocalDateTime.of(2014, Month.MARCH,22,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2020, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Barcelona",ZonedDateTime.of(LocalDateTime.of(2020, Month.APRIL,2,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Madrid",ZonedDateTime.of(LocalDateTime.of(2022, Month.APRIL,16,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Warsaw", ZonedDateTime.of(LocalDateTime.of(2015, Month.MAY,2,2,20), ZoneId.of("UTC")),"Cracow",ZonedDateTime.of(LocalDateTime.of(2015, Month.MAY,7,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2011, Month.APRIL,2,2,20), ZoneId.of("UTC")),"Oslo",ZonedDateTime.of(LocalDateTime.of(2011, Month.APRIL,12,2,20), ZoneId.of("UTC")),20,70.00));
+        offers.add( new OfferWriteModel("Cracow", ZonedDateTime.of(LocalDateTime.of(2030, Month.MARCH,2,2,20), ZoneId.of("UTC")),"Warsaw",ZonedDateTime.of(LocalDateTime.of(2030, Month.MARCH,21,2,20), ZoneId.of("UTC")),20,70.00));
+
 
         offers.forEach(tripService::addOffer);
 

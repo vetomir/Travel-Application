@@ -1,11 +1,13 @@
 package pl.gregorymartin.touristapp.view;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.gregorymartin.touristapp.trip.CommentService;
 import pl.gregorymartin.touristapp.trip.TripService;
+import pl.gregorymartin.touristapp.trip.dto.BookingWriteModel;
 import pl.gregorymartin.touristapp.trip.dto.CommentReadModel;
 import pl.gregorymartin.touristapp.trip.dto.OfferSearch;
 import pl.gregorymartin.touristapp.user.dto.UserWriteModel;
@@ -27,11 +29,11 @@ class HomepageController {
     @GetMapping
     String homepage(
             Model model,
-            Principal principal
+            Authentication authentication
     ){
         //auth
         boolean userIsPresent = false;
-        if(principal != null){
+        if(authentication != null){
             userIsPresent = true;
         }
         model.addAttribute("userIsPresent", userIsPresent);
@@ -49,6 +51,8 @@ class HomepageController {
         List<OfferSearch> topOffers =
                 tripService.getTopOffers(0, Sort.Direction.DESC, "id", 6);
         model.addAttribute("topOffers", topOffers);
+
+        model.addAttribute("bookingWriteModel", new BookingWriteModel());
 
         //coments
         List<CommentReadModel> newComments =

@@ -97,12 +97,15 @@ class UserController {
         AppUser appUser = (AppUser) authentication.getPrincipal();
         model.addAttribute("user", AppUserFactory.toDto(appUser));
 
-        List<BookingUserPanel> bookingByUser = tripService.getBookingByUser(appUser.getId());
-        model.addAttribute("bookings", bookingByUser);
+        List<BookingUserPanel> futureBookings = tripService.getFutureBookingsByUser(appUser.getId());
+        model.addAttribute("futureBookings", futureBookings);
+
+        List<BookingUserPanel> pastBookings = tripService.getPastBookingsByUser(appUser.getId());
+        model.addAttribute("pastBookings", pastBookings);
 
 
 
-        model.addAttribute("comments", CommentFactory.toCommentUserPanel(appUser.getComments()));
+        model.addAttribute("comments", CommentFactory.toCommentUserPanel(commentService.getCommentByUser(appUser.getId())));
 
         return "user-panel";
     }

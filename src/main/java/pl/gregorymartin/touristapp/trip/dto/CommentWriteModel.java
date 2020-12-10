@@ -12,6 +12,9 @@ class CommentWriteModel {
     private long offerId;
     private String comment;
 
+    public CommentWriteModel() {
+    }
+
     public CommentWriteModel(final long userId, final long offerId, final String comment) {
         this.userId = userId;
         this.offerId = offerId;

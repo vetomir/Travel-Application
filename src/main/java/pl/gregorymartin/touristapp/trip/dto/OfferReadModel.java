@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Builder
@@ -23,4 +24,20 @@ class OfferReadModel {
     private double price;
 
     private List<BookingReadModel> bookings;
+
+    private CommentReadModel review;
+
+
+    public String departureTimeDate(){
+        return departureTime.format(DateTimeFormatter.ofPattern("dd LLLL yyyy")).toUpperCase();
+    }
+    public String departureTimeHour(){
+        return departureTime.format(DateTimeFormatter.ofPattern("hh:mm a")).toUpperCase();
+    }
+    public String arrivingTimeDate(){
+        return arrivingTime.format(DateTimeFormatter.ofPattern("dd LLLL yyyy")).toUpperCase();
+    }
+    public String arrivingTimeHour(){
+        return arrivingTime.format(DateTimeFormatter.ofPattern("hh:mm a")).toUpperCase();
+    }
 }

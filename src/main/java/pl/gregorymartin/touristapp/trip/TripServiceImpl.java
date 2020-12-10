@@ -65,9 +65,13 @@ class TripServiceImpl implements TripService{
         else
             return OfferFactory.toOfferSearch(offerRepository.searchOffers(from,to,when));
     }
-    public List<BookingUserPanel> getBookingByUser(long userId){
-
-        return BookingFactory.toBookingUserPanel(bookingRepository.findAllByAppUser_IdOrderByIdDesc(userId));
+    public List<BookingUserPanel> getFutureBookingsByUser(long userId){
+        List<Booking> bookings = bookingRepository.findAllByUserIdAndSortByDepartureDateFuture(userId, ZonedDateTime.now());
+        return BookingFactory.toBookingUserPanel(bookings);
+    }
+    public List<BookingUserPanel> getPastBookingsByUser(long userId){
+        List<Booking> bookings = bookingRepository.findAllByUserIdAndSortByDepartureDatePast(userId, ZonedDateTime.now());
+        return BookingFactory.toBookingUserPanel(bookings);
     }
 
     public List<OfferSearch> getTopOffers(int page, Sort.Direction sort, String sortBy, int items){

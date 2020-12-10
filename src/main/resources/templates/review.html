@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
 
     <link href="../static/travel.css" th:href="@{/travel.css}" rel="stylesheet" />
+    <link href="../static/review.css" th:href="@{/review.css}" rel="stylesheet" />
 </head>
 <body>
     <div id="cover">
@@ -124,13 +125,16 @@
 
             </div>
 
-            <div>
-                <h1>Booking</h1>
-
-
-                <form class="form" method="post" th:action="|@{/booking/}${offerId}|" th:object="${bookingWriteModel}">
-                    <input type="number" th:field="*{size}">
-                    <button type="submit" >Register</button>
+            <div id="review">
+                <h1>Review Your trip</h1>
+                <form class="form" method="post" th:action="|@{/booking/review/}${offerId}/add|" th:object="${review}">
+                    <p th:text="${offer.id}"></p>
+                    <p th:text="${offer.departureCityName}"></p>
+                    <p th:text="${offer.arrivingCityName}"></p>
+                    <p th:text="${offer.departureTime}"></p>
+                    <p>---------------------------------</p>
+                    <input type="text" th:field="*{comment}">
+                    <button type="submit" >Submit</button>
                 </form>
             </div>
         </div>

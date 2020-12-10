@@ -7,7 +7,7 @@
     }
     100% {
         color: #fff;
-        transform: scale(1.1);
+        transform: scale(1.02);
         box-shadow: 0 0 .5rem #FCAF45;
     }
 }
@@ -138,7 +138,7 @@
     margin-bottom: 2rem;
 }
 #user-booking-page{
-    width: 70%;
+    width: 100%;
     height: auto;
     display: flex;
     justify-content: space-between;
@@ -177,6 +177,9 @@
     width: 100%;
     height: 100%;
     background-color: #00000078;
+}
+#user-booking-page .content-bg img{
+    width: 100%;
 }
 #user-booking-page > div:hover{
     animation-duration: .5s;
@@ -286,4 +289,28 @@
     line-height: 1.2rem;
     text-transform: none;
     border:1px solid white;
+}
+#user-booking-page .review{
+    right: 2rem;
+    bottom: 1rem;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 400;
+    padding: 1rem 2rem;
+    background: #fff;
+    border-radius: 50px;
+    line-height: 1.2rem;
+    text-transform: none;
+}
+#user-booking-page .review:hover{
+    color: white;
+    background: #faad46;
+    text-decoration: none;
+}
+
+#history{
+    width: 100%;
+    font-weight: 100;
+    margin: 2rem;
+    border-bottom: 1px solid #ddd;
 }

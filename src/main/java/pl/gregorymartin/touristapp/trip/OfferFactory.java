@@ -47,6 +47,7 @@ class OfferFactory {
                 .capacity(offer.getCapacity())
                 .price(offer.getPrice())
                 .bookings(BookingFactory.toDto(new ArrayList<>(offer.getBookings())))
+
                 .build();
     }
 
@@ -61,6 +62,7 @@ class OfferFactory {
         int days = (int) ChronoUnit.DAYS.between(offer.getDepartureTime(), offer.getArrivingTime());
 
         return OfferSearch.builder()
+                .id(offer.getId())
                 .departureCityName(offer.getDepartureCityName())
                 .departureTime(offer.getDepartureTime())
                 .arrivingCityName(offer.getArrivingCityName())

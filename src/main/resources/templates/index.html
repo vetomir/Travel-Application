@@ -27,8 +27,8 @@
                         </div>
                         <div class="uk-navbar-right menu-right">
                             <ul class="uk-navbar-nav">
-                                <li><a href="#" uk-icon="lock" uk-toggle="target: #offcanvas-login"></a></li>
-                                <li><a href="#" uk-icon="user" uk-toggle="target: #offcanvas-panel"></a></li>
+                                <li th:if="!${userIsPresent}"><a href="#" uk-icon="lock" uk-toggle="target: #offcanvas-login"></a></li>
+                                <li th:if="${userIsPresent}"><a href="#" uk-icon="user" uk-toggle="target: #offcanvas-panel"></a></li>
                                 <li><a href="#" uk-icon="menu" uk-toggle="target: #offcanvas-menu"></a></li>
                             </ul>
                         </div>
@@ -53,7 +53,6 @@
             <div class="user-modal uk-modal-dialog uk-modal-body">
                 <button class="uk-modal-close-default" type="button" uk-close></button>
                 <div>
-                    <a href="#" th:href="@{/users/panel}">My Bookings</a>
                     <a href="#" th:href="@{/users/panel}">My Account</a>
                     <a class="logout" href="#" th:href="@{/logout}">Log Out</a>
                 </div>
@@ -155,26 +154,50 @@
             </div>
         </div>
         <div id="content">
-            <div class="column1">
-                <div id="weather-forecast">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
             <div class="column2">
                 <h1 class="content-desc">Top destinations...</h1>
                 <h1 class="content-desc-bg">Top destinations...</h1>
                 <div id="top-destinations">
                     <!--/*@thymesVar id="project" type="pl.gregorymartin.touristapp.trip.dto.OfferSearch"*/-->
                     <div th:each="offer : ${topOffers}">
-                        <div class="content">
-                            <h2 th:text="|${offer.getDepartureCityName()} to|">Warsaw to</h2>
-                            <h1 th:text="${offer.getArrivingCityName()}">Madrid</h1>
-                            <span th:text="|${offer.getPrice()}$|">from 700$</span>
+                        <a class="link" th:href="|#offcanvas-book${offer.id}|" uk-toggle>
+                            <div class="content">
+                                <h2 th:text="|${offer.getDepartureCityName()} to|">Warsaw to</h2>
+                                <h1 th:text="${offer.getArrivingCityName()}">Madrid</h1>
+                                <span th:text="|${offer.getPrice()}$|">from 700$</span>
+                            </div>
+                            <img th:src="${offer.getArrivingCityPhotoUrl()}">
+                        </a>
+                        <div th:id="|offcanvas-book${offer.id}|" uk-modal>
+                            <button class="uk-modal-close-default" type="button" uk-close></button>
+
+                            <form class="form booking uk-modal-dialog uk-modal-body" th:action="|@{/booking/}${offer.id}|" th:object="${bookingWriteModel}"method="post">
+                                <div class="content">
+                                    <div>
+                                        <h2 class="city-name" th:text="|${offer.getDepartureCityName()}|">Warsaw to</h2>
+                                        <p class="city-date" th:text="|${offer.departureTimeDate()}|">Warsaw to</p>
+                                        <h2 class="city-hour" th:text="|${offer.departureTimeHour()}|">Warsaw to</h2>
+                                    </div>
+                                    <div class="details">
+                                        <h2 class="city-days"th:text="|${offer.getDays()} Days|">Madrid</h2>
+                                        <h2 class="city-price" th:text="|${offer.getPrice()}$|">from 700$</h2>
+                                    </div>
+                                    <div>
+                                        <h2 class="city-name" th:text="|${offer.getArrivingCityName()}|">Warsaw to</h2>
+                                        <p class="city-date" th:text="|${offer.arrivingTimeDate()}|">Warsaw to</p>
+                                        <h2 class="city-hour" th:text="|${offer.arrivingTimeHour()}|">Warsaw to</h2>
+
+                                    </div>
+                                </div>
+                                <div class="shadow"></div>
+                                <img th:src="${offer.getArrivingCityPhotoUrl()}">
+                                <!--th:field="*{size}"-->
+                                <div>
+                                    <input class="book-input" th:field="*{size}" type="number" placeholder="Size">
+                                    <button type="submit" value="submit" class="login book-button">Submit</button>
+                                </div>
+                            </form>
                         </div>
-                        <img th:src="${offer.getArrivingCityPhotoUrl()}">
                     </div>
                 </div>
             </div>

@@ -39,13 +39,11 @@
         transform: scale(1);
         z-index: 1;
         box-shadow: 0 0 0rem #fff;
-        border: .3rem solid #fff;
     }
     100% {
-        transform: scale(1.2);
+        transform: scale(1.02);
         z-index: 1;
-        box-shadow: 0 0 1rem #202020;
-        border: .3rem solid #fcaf45;
+        box-shadow: 2px 2px 1rem #FCAF45;
     }
 }
 @keyframes yellow-button-subscribe {
@@ -264,12 +262,9 @@ body{
     display: flex;
     justify-content: space-between;
 }
-#content > .column1{
-    width: 20%;
-}
 #content > .column2{
+    width: 100%;
     position: relative;
-    width: 75%;
 }
 #weather-forecast{
     display: flex;
@@ -302,16 +297,20 @@ body{
     align-items: center;
     position: relative;
     overflow: hidden;
-    border: .3rem solid #fff;
 
 }
 #top-destinations > div:hover{
-    transform: scale(1.2);
+    transform: scale(1.02);
     z-index: 1;
     box-shadow: 0 0 1rem #202020;
+    box-sizing: border-box;
     animation-duration: .5s;
     animation-name: content-item;
     animation-fill-mode: forwards;
+}
+#top-destinations > div .link{
+    width: 100%;
+    height: 100%;
 }
 #top-destinations > div .content{
     position: absolute;
@@ -610,4 +609,105 @@ body{
 .off-canvas .option a:hover{
     color: #FCAF45 !important;
 }
+.booking{
+    width: 800px;
+    overflow: hidden;
+}
+.booking > form{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
 
+.booking > div{
+    z-index: 100;
+    display: flex;
+}
+.booking .content{
+    z-index: 100;
+    width: 100%;
+    padding: 3rem;
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+}
+.booking .content > div{
+    color: #fcaf45;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.booking .content > div .city-from{
+    color: white;
+    font-weight: 600;
+}
+.booking img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.booking .shadow{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    background-color: #000000c2;
+}
+.booking .city-name{
+    font-size: 3rem;
+    color: white;
+    margin: 0;
+}
+.booking .city-date{
+    color: black;
+    margin: 1rem;
+    padding: .5rem 1rem;
+    background: white;
+    border-radius: 20px;
+}
+.booking .city-hour{
+    color: white;
+    margin: 0;
+}
+.booking .details{
+    border: 1px solid #fcaf45;
+    padding: 1rem;
+    border-radius: 20px;
+}
+.booking .city-days{
+    font-weight: 600;
+    color: #fcaf45;
+    font-size: 2rem;
+    margin: 1rem;
+}
+.booking .city-price{
+    color: #fcaf45;
+    font-size: 2rem;
+}
+.booking .book-button{
+    margin: 0 0 0 2rem;
+    background:none;
+}
+.booking .book-input{
+    font-size: 1rem;
+    width: 100%;
+    /* height: 10px; */
+    padding: 0 1.5rem;
+    height: auto;
+    border-radius: 20px;
+    text-align: center;
+    background: none;
+    color: white;
+    /* height: 5rem; */
+    border: 2px solid #ddd;
+}

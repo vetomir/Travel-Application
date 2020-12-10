@@ -19,7 +19,8 @@ public interface TripService {
 
     public List<OfferSearch> searchOffers(String from, String to, ZonedDateTime when);
 
-    public List<BookingUserPanel> getBookingByUser(long userId);
+    public List<BookingUserPanel> getFutureBookingsByUser(long userId);
+    public List<BookingUserPanel> getPastBookingsByUser(long userId);
 
     OfferReadModel getOfferById(long id);
 
