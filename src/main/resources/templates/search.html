@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <link href="../static/travel.css" th:href="@{/travel.css}" rel="stylesheet" />
+    <link href="../static/search.css" th:href="@{/search.css}" rel="stylesheet" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
@@ -164,40 +165,34 @@
                 </div>
             </div>
             <div class="column2">
-                <h1 class="content-desc">Top destinations...</h1>
-                <h1 class="content-desc-bg">Top destinations...</h1>
-                <div id="top-destinations">
+                <h1 class="content-desc" th:text="${contentDesc}">Top destinations...</h1>
+                <h1 class="content-desc-bg" th:text="${contentDesc}">Top destinations...</h1>
+
+                <div id="search-page">
                     <!--/*@thymesVar id="project" type="pl.gregorymartin.touristapp.trip.dto.OfferSearch"*/-->
-                    <div th:each="offer : ${topOffers}">
+                    <div th:each="offer : ${offersList}">
                         <div class="content">
-                            <h2 th:text="|${offer.getDepartureCityName()} to|">Warsaw to</h2>
-                            <h1 th:text="${offer.getArrivingCityName()}">Madrid</h1>
-                            <span th:text="|${offer.getPrice()}$|">from 700$</span>
+                            <div class="location" >
+                                <p th:text="|${offer.getDepartureCityName()} to |">from</p>
+                                <p th:text="| ${offer.getArrivingCityName()}|">to</p>
+                            </div>
+
+                            <div class="dates">
+                                <div class="date">
+                                    <p th:text="${offer.departureTimeDate()}">dep date</p>
+                                    <h2 th:text="${offer.departureTimeHour()}">dep time</h2>
+                                </div>
+                                <p class="days" th:text="|${offer.getDays()} DAYS|">days</p>
+                                <div class="date">
+                                    <p th:text="${offer.arrivingTimeDate()}">arr date</p>
+                                    <h2 th:text="${offer.arrivingTimeHour()}">arr time</h2>
+                                </div>
+                            </div>
+                            <span class="price" th:text="|${offer.getPrice()}$|">from 700$</span>
                         </div>
-                        <img th:src="${offer.getArrivingCityPhotoUrl()}">
+
                     </div>
                 </div>
-            </div>
-        </div>
-        <div id="comments">
-            <h1 class="comment-desc">Traveller's Experiences</h1>
-            <h1 class="comment-desc-bg">Traveller's Experiences</h1>
-            <p>Some awesome feedback from our travellers</p>
-            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="autoplay: true">
-                <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-grid">
-                    <li class="comment" th:each="comment : ${newComments}">
-                        <div class="uk-panel">
-                            <div class="author">
-                                <img th:src="${comment.getUserAvatar()}">
-                                <h2 th:text="${comment.name}">Author</h2>
-                            </div>
-                            <p class="comment-content" th:text="${comment.comment}">
-                                Comment...
-                            </p>
-                        </div>
-                    </li>
-                </ul>
-
             </div>
         </div>
         <div id="footer">

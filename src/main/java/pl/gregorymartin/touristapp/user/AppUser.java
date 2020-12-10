@@ -19,7 +19,7 @@ import java.util.Set;
 @Setter
 @Table(name = "app_users")
 public
-class AppUser implements UserDetails {
+class AppUser extends Audit implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -30,15 +30,15 @@ class AppUser implements UserDetails {
 
     private String password;
 
-    private boolean isEnabled;
+    private boolean isEnabled = true;
 
     private Role role;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "app_user_id",  insertable = false)
     Set<Booking> bookings = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "app_user_id")
     private List<Comment> comments;
 
@@ -59,22 +59,22 @@ class AppUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return isEnabled;
+        return true;
     }
 
     public void toggleEnable() {

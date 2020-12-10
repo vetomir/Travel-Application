@@ -2,6 +2,7 @@ package pl.gregorymartin.touristapp.user;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import pl.gregorymartin.touristapp.user.dto.UserReadModel;
 import pl.gregorymartin.touristapp.user.dto.UserWriteModel;
@@ -36,6 +37,7 @@ class AppUserRestController {
         UserReadModel user = appUserService.getAppUserById(id);
         return ResponseEntity.ok(user);
     }
+
 
     @PostMapping
     public ResponseEntity<UserReadModel> createAppUser(
@@ -79,5 +81,11 @@ class AppUserRestController {
     public ResponseEntity deleteAppUser(@RequestParam long id) {
         appUserService.deleteUser(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/elo")
+    String elo(Authentication authentication){
+        AppUser user = (AppUser) authentication.getPrincipal();
+        return user.getUsername();
     }
 }

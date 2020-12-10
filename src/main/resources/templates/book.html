@@ -2,17 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800;900&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <link href="../static/travel.css" th:href="@{/travel.css}" rel="stylesheet" />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
-    <title>TEST TRAVEL PAGE </title>
 </head>
 <body>
     <div id="cover">
@@ -53,8 +49,8 @@
             <div class="user-modal uk-modal-dialog uk-modal-body">
                 <button class="uk-modal-close-default" type="button" uk-close></button>
                 <div>
-                    <a href="#" th:href="@{/users/panel}">My Bookings</a>
-                    <a href="#" th:href="@{/users/panel}">My Account</a>
+                    <a href="#" th:href="|@{/users?id=1/bookings}|">My Bookings</a>
+                    <a href="#" th:href="|@{/users?id=1/my-account}|">My Account</a>
                     <a class="logout" href="#" th:href="@{/logout}">Log Out</a>
                 </div>
 
@@ -95,33 +91,7 @@
 
             </div>
         </div>
-
         <div id="header">
-            <div class="search">
-                <form class="uk-form-stacked" action="#" method="post" th:action="@{/search}" th:object="${search}">
-                    <div class="uk-margin">
-                        <select class="select uk-select" th:field="*{from}">
-                            <option value="Anywhere">From</option>
-                            <option th:each="option : ${fromLocation}" th:value="${option}" th:text="${option}">Option 01</option>
-                        </select>
-                    </div>
-
-                    <div class="uk-margin">
-                        <select class="select uk-select" th:field="*{to}">
-                            <option value="Anywhere">To</option>
-                            <option th:each="option : ${toLocation}" th:value="${option}" th:text="${option}">Option 01</option>
-                            <!--<option class="inactive" disabled="disabled">Option 03</option>-->
-                        </select>
-                    </div>
-
-                    <div class="uk-margin">
-                        <div class="uk-form-controls">
-                            <input class="uk-input" type="date" th:field="*{date}" pattern="dd.MM.yyyy">
-                        </div>
-                    </div>
-                    <button class="uk-button uk-button-default" type="submit" value="Submit">Search</button>
-                </form>
-            </div>
             <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="animation: fade; autoplay: true">
                 <ul class="uk-slideshow-items">
                     <li>
@@ -153,52 +123,13 @@
                 <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
 
             </div>
-        </div>
-        <div id="content">
-            <div class="column1">
-                <div id="weather-forecast">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-            <div class="column2">
-                <h1 class="content-desc">Top destinations...</h1>
-                <h1 class="content-desc-bg">Top destinations...</h1>
-                <div id="top-destinations">
-                    <!--/*@thymesVar id="project" type="pl.gregorymartin.touristapp.trip.dto.OfferSearch"*/-->
-                    <div th:each="offer : ${topOffers}">
-                        <div class="content">
-                            <h2 th:text="|${offer.getDepartureCityName()} to|">Warsaw to</h2>
-                            <h1 th:text="${offer.getArrivingCityName()}">Madrid</h1>
-                            <span th:text="|${offer.getPrice()}$|">from 700$</span>
-                        </div>
-                        <img th:src="${offer.getArrivingCityPhotoUrl()}">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="comments">
-            <h1 class="comment-desc">Traveller's Experiences</h1>
-            <h1 class="comment-desc-bg">Traveller's Experiences</h1>
-            <p>Some awesome feedback from our travellers</p>
-            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="autoplay: true">
-                <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-grid">
-                    <li class="comment" th:each="comment : ${newComments}">
-                        <div class="uk-panel">
-                            <div class="author">
-                                <img th:src="${comment.getUserAvatar()}">
-                                <h2 th:text="${comment.name}">Author</h2>
-                            </div>
-                            <p class="comment-content" th:text="${comment.comment}">
-                                Comment...
-                            </p>
-                        </div>
-                    </li>
-                </ul>
 
-            </div>
+            <div>
+            <h1>Booking</h1>
+            <form class="form" method="post" th:action="|@{/booking/}${offerId}|" th:object="${bookingWriteModel}">
+                <input type="number" th:field="*{size}">
+                <button type="submit" >Register</button>
+            </form>
         </div>
         <div id="footer">
             <div id="subscribe">
@@ -221,5 +152,7 @@
             </div>
         </div>
     </div>
+
+
 </body>
 </html>

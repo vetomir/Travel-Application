@@ -33,6 +33,7 @@ class Warmup implements ApplicationListener<ContextRefreshedEvent> {
         users.forEach(appUserService::createAppUser);
 
         appUserService.toggleRole(2L);
+        appUserService.changePhoto(1 , "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     }
 
 

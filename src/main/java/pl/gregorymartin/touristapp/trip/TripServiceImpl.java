@@ -1,5 +1,7 @@
 package pl.gregorymartin.touristapp.trip;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -10,11 +12,15 @@ import pl.gregorymartin.touristapp.trip.dto.*;
 import pl.gregorymartin.touristapp.user.AppUser;
 import pl.gregorymartin.touristapp.user.AppUserRepository;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 class TripServiceImpl implements TripService{
+    private Logger logger = LoggerFactory.getLogger(TripService.class);
+
     private SqlBookingRepository bookingRepository;
     private SqlOfferRepository offerRepository;
     private CityRepository cityRepository;
@@ -34,13 +40,42 @@ class TripServiceImpl implements TripService{
                 )).getContent();
         return OfferFactory.toDto(offers);
     }
+    public List<String> availableCitiesToArrive(){
+        List<Offer> offers = offerRepository.findAll();
 
-    public List<OfferMvcHomepage> getTopOffers(int page, Sort.Direction sort, String sortBy, int items){
+        return offers.stream().map(Offer::getArrivingCityName).distinct().collect(Collectors.toList());
+    }
+    public List<String> availableCitiesToDeparture(){
+        List<Offer> offers = offerRepository.findAll();
+
+        return offers.stream().map(Offer::getDepartureCityName).distinct().collect(Collectors.toList());
+    }
+
+    public List<OfferSearch> searchOffers(String from, String to, ZonedDateTime when){
+
+        if(to.equals(from)){
+            throw new IllegalArgumentException("Wrong query");
+        }
+        if (to.equals("Anywhere")){
+            return OfferFactory.toOfferSearch(offerRepository.searchOffersWithoutTo(from,when));
+        }
+        if(from.equals("Anywhere")){
+            return OfferFactory.toOfferSearch(offerRepository.searchOffersWithoutFrom(to,when));
+        }
+        else
+            return OfferFactory.toOfferSearch(offerRepository.searchOffers(from,to,when));
+    }
+    public List<BookingUserPanel> getBookingByUser(long userId){
+
+        return BookingFactory.toBookingUserPanel(bookingRepository.findAllByAppUser_IdOrderByIdDesc(userId));
+    }
+
+    public List<OfferSearch> getTopOffers(int page, Sort.Direction sort, String sortBy, int items){
         List<Offer> offers = offerRepository.findAll(
                 PageRequest.of(page, items,
                         Sort.by(sort, sortBy)
                 )).getContent();
-        return OfferFactory.toMvcDto(offers);
+        return OfferFactory.toOfferSearch(offers);
     }
 
     public List<BookingReadModel> getAllBookings(int page, Sort.Direction sort, String sortBy, int items){
@@ -50,6 +85,7 @@ class TripServiceImpl implements TripService{
                 )).getContent();
         return BookingFactory.toDto(offers);
     }
+
 
     public OfferReadModel getOfferById(long id){
         Optional<Offer> offer = offerRepository.findById(id);
@@ -101,6 +137,7 @@ class TripServiceImpl implements TripService{
         booking.setPrice(offer.get().getPrice() * booking.getSize());
 
         offer.get().setCapacity(offer.get().getCapacity() - bookingWriteModel.getSize());
+        logger.info("Create booking for user: {} for {} people, offer id = {}", appUser.get().getUsername(), bookingWriteModel.getSize(), bookingWriteModel.getOfferId());
         offerRepository.save(offer.get());
 
         return BookingFactory.toDto(bookingRepository.save(booking));
@@ -131,12 +168,20 @@ class TripServiceImpl implements TripService{
     }
 
     @Transactional
-    public BookingReadModel setPaid(long id){
+    public BookingReadModel setPaid(long id, long userId){
         Optional<Booking> bookingById = bookingRepository.findById(id);
         if(bookingById.isEmpty()){
             throw new IllegalArgumentException("Booking with is not presents");
         }
+        if(bookingById.get().getAppUser().getId() != userId){
+            throw new IllegalArgumentException("User is not correct");
+        }
+        if(bookingById.get().isPaid()){
+            throw new IllegalArgumentException("Booking " + id + " is already paid");
+        }
+
         bookingById.get().setPaid(true);
+        logger.info("booking id: {}, is paid", id);
 
         return BookingFactory.toDto(bookingRepository.save(bookingById.get()));
     }

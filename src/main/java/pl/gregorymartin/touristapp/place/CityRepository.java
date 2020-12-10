@@ -3,6 +3,7 @@ package pl.gregorymartin.touristapp.place;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CityRepository {
@@ -15,4 +16,6 @@ public interface CityRepository {
     void delete(City city);
 
     Optional<City> findByName(String departureCityName);
+
+    List<City> findAll();
 }

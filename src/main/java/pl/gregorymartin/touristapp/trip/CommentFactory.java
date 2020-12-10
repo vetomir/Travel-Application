@@ -1,6 +1,7 @@
 package pl.gregorymartin.touristapp.trip;
 
 import pl.gregorymartin.touristapp.trip.dto.CommentReadModel;
+import pl.gregorymartin.touristapp.trip.dto.CommentUserPanel;
 import pl.gregorymartin.touristapp.trip.dto.CommentWriteModel;
 
 import java.util.List;
@@ -31,7 +32,22 @@ public class CommentFactory {
         return CommentReadModel.builder()
                 .id(comment.getId())
                 .name(comment.getAppUser().getName())
+                .userAvatar(comment.getAppUser().getPhotoUrl())
                 .comment(comment.getComment())
+                .build();
+    }
+
+    public static List<CommentUserPanel> toCommentUserPanel(List<Comment> comment){
+        return comment.stream()
+                .map(CommentFactory::toCommentUserPanel)
+                .collect(Collectors.toList());
+    }
+    public static CommentUserPanel toCommentUserPanel(Comment comment) {
+
+        return CommentUserPanel.builder()
+                .comment(comment.getComment())
+                .createdOn(comment.formatCreatedOn())
+                /*.bookingUserPanel(BookingFactory.toBookingUserPanel(comment.getBooking()))*/
                 .build();
     }
 }

@@ -1,14 +1,15 @@
 package pl.gregorymartin.touristapp.trip;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.gregorymartin.touristapp.trip.dto.BookingReadModel;
-import pl.gregorymartin.touristapp.trip.dto.BookingWriteModel;
-import pl.gregorymartin.touristapp.trip.dto.OfferReadModel;
-import pl.gregorymartin.touristapp.trip.dto.OfferWriteModel;
+import pl.gregorymartin.touristapp.trip.dto.*;
 
 import java.net.URI;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,6 +29,14 @@ class TripRestController {
         String sortByVariable = sortBy != null ? sortBy : "id";
 
         return ResponseEntity.ok(tripServiceImpl.getAllOffers(pageNumber, sortDirection, sortByVariable, 25));
+    }
+
+    @GetMapping("/search")
+    ResponseEntity<List<OfferSearch>> searchOffers(String from, String to, @DateTimeFormat(pattern = "dd.MM.yyyy") Date date){
+        ZonedDateTime when = date.toInstant().atZone(ZoneId.systemDefault());
+
+
+        return ResponseEntity.ok(tripServiceImpl.searchOffers(from,to,when));
     }
 
     @GetMapping("/bookings/list")
@@ -76,9 +85,10 @@ class TripRestController {
         return ResponseEntity.created(URI.create("/" + bookingReadModel.getId())).body(bookingReadModel);
     }
 
+    //todo
     @PatchMapping("/bookings/pay")
     public ResponseEntity<BookingReadModel> payBooking(@RequestParam long id/*, @RequestParam(name = "user-id") long userId*/) {
-        BookingReadModel bookingReadModel = tripServiceImpl.setPaid(id);
+        BookingReadModel bookingReadModel = tripServiceImpl.setPaid(id, 3);
         return ResponseEntity.created(URI.create("/" + bookingReadModel.getId())).body(bookingReadModel);
     }
 

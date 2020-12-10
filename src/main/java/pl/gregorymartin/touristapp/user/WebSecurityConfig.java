@@ -29,8 +29,9 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.authorizeRequests()
+        http
+                .csrf().disable()
+                .authorizeRequests()
 /*                .antMatchers(HttpMethod.POST, "/users").authenticated()
                 .antMatchers(HttpMethod.POST, "/roles").authenticated()
                 .antMatchers(HttpMethod.POST, "/posts").authenticated()
@@ -45,7 +46,10 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/comments").authenticated()*/
                 .anyRequest().permitAll()
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/")
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/users/panel", true)
+                .failureUrl("/login.html?error=true")
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/")
         ;
@@ -55,32 +59,4 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsServiceBean() throws Exception {
         return super.userDetailsServiceBean();
     }
-/*
-    @Bean
-    public PasswordEncoder getPasswordEncoder(){
-        return new BCryptPasswordEncoder();
-    }*//*
-
-    public WebSecurityConfig() {
-    }
-*//*
-    @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.userDetailsService(userDetailsService);
-    }*//*
-
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.authorizeRequests()
-                .anyRequest().permitAll()
-                .and();
-                //.addFilterBefore(new JwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-    }
-*//*
-    @Override
-    public UserDetailsService userDetailsServiceBean() throws Exception {
-        return super.userDetailsServiceBean();
-    }*/
 }

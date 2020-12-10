@@ -1,0 +1,289 @@
+@keyframes user-panel-content {
+    0% {
+        color: #fff;
+        transform: scale(1);
+        box-shadow: 0 0 0 #FCAF45;
+
+    }
+    100% {
+        color: #fff;
+        transform: scale(1.1);
+        box-shadow: 0 0 .5rem #FCAF45;
+    }
+}
+@keyframes user-panel-content-bg {
+    0% {
+        background-color: #00000078;
+
+    }
+    100% {
+        background-color: #fcaf45c9;
+    }
+}
+
+.user-panel{
+}
+.user-panel .user-header{
+
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 15rem 2rem 2rem 2rem;
+    border-radius: 0 0 50px 50px;
+    align-items: flex-end;
+    overflow: hidden;
+}
+.user-panel .user-header > .user-header-bg{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 20;
+    background-color: #00000033;
+}
+.user-panel .user-header > img{
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 10;
+}
+.user-panel .user-header h1{
+    color: white;
+    width: 50%;
+    font-weight: 600;
+    margin: 2rem;
+    z-index: 100;
+}
+.user-panel .user-details{
+    z-index: 100;
+    display: flex;
+    padding: 1rem 3rem 1rem 1rem;
+    border: 3px solid #faad46;
+    border-radius: 50px;
+}
+.user-panel .user-details .user-avatar{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50px;
+    overflow: hidden;
+}
+.user-panel .user-details .user-avatar img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.user-panel .user-details div{
+    margin-top: 0;
+    margin-left: 1rem;
+}
+.user-panel .user-details .name{
+    color: white;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.user-panel .user-details .email{
+    color: #fcaf45;
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 600;
+}
+.user-bookings > div{
+    border: 1px solid #111;
+    border-radius: 50px;
+    margin: 3rem 0;
+    padding: 5rem;
+}
+.user-bookings div .user-bookings-city{
+    padding:1rem;
+}
+.user-bookings div .user-bookings-city{
+    display: flex;
+
+}
+.user-bookings div .user-bookings-city h1{
+    margin: 0;
+    width: 50%;
+}
+.user-bookings div .user-bookings-time{
+    display: flex;
+}
+.user-bookings div .user-bookings-time p{
+    width: 50%;
+}
+.user-bookings div .user-bookings-details{
+    display: flex;
+}
+.user-bookings div .user-bookings-details p{
+    width: 20%;
+}
+.user-comments{
+
+}
+#user-booking-content{
+    display: flex;
+    margin-top: 2rem;
+}
+#user-booking-content > .nav{
+    width: 30%;
+}
+#user-booking-content > .nav a{
+    width: 100%;
+    border-radius: 50px;
+    font-weight: 600;
+    padding: 1rem;
+    border: 3px solid black;
+    margin-bottom: 2rem;
+}
+#user-booking-page{
+    width: 70%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+#user-booking-page > div{
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    height: 200px;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    z-index: 100;
+}
+#user-booking-page .content-bg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+#user-booking-page .content-bg .content-bg-shadow{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000078;
+}
+#user-booking-page > div:hover{
+    animation-duration: .5s;
+    animation-name: user-panel-content;
+    animation-fill-mode: forwards;
+}
+#user-booking-page > div:hover .content-bg-shadow{
+    animation-duration: .5s;
+    animation-name: user-panel-content-bg;
+    animation-fill-mode: forwards;
+}
+#user-booking-page div .content{
+    margin-top: 2rem;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#user-booking-page div .content .location{
+    position: absolute;
+    top: 0;
+    left: 4rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+}
+#user-booking-page div .content .location p{
+    margin: 0 0 0 .5rem;
+}
+#user-booking-page div .content .location :first-child{
+    font-weight: 100;
+}
+#user-booking-page .dates{
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+}
+#user-booking-page .dates .date{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#user-booking-page .dates .date p{
+    color: #404040;
+    background: #fff;
+    padding: .3rem .5rem;
+    border-radius: 20px;
+}
+#user-booking-page .dates .date h2{
+    color: #fff;
+    margin: 0;
+    font-size: 2rem;
+}
+#user-booking-page .dates .days{
+    font-size: 3rem;
+    font-weight: 700;
+}
+#user-booking-page .people h2{
+    font-weight: 600;
+    color: #fff;
+}
+#user-booking-page .price{
+    position: unset;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-right: 2rem;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 #fff;
+}
+#user-booking-page .paid{
+    right: 2rem;
+    top: 2rem;
+    position: absolute;
+    color: #fff;
+}
+#user-booking-page .unpaid{
+    right: 2rem;
+    top: 1rem;
+    position: absolute;
+    color: black;
+    padding: .5rem;
+    background: #fff;
+    border-radius: 20px;
+    line-height: 1.2rem;
+    text-transform: none;
+}
+#user-booking-page .unpaid:hover{
+    color: white;
+    background: #faad46;
+    text-decoration: none;
+}
+
+#user-booking-page .paid{
+    right: 2rem;
+    top: 1rem;
+    position: absolute;
+    color: white;
+    padding: .5rem;
+    background: none;
+    border-radius: 20px;
+    line-height: 1.2rem;
+    text-transform: none;
+    border:1px solid white;
+}

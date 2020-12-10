@@ -1,4 +1,4 @@
-package pl.gregorymartin.touristapp.view;
+package pl.gregorymartin.touristapp.view.dto;
 
 
 

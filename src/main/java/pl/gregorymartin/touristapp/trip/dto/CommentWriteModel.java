@@ -9,12 +9,12 @@ import lombok.Setter;
 public
 class CommentWriteModel {
     private long userId;
-    private long bookingId;
+    private long offerId;
     private String comment;
 
-    public CommentWriteModel(final long userId, final long bookingId, final String comment) {
+    public CommentWriteModel(final long userId, final long offerId, final String comment) {
         this.userId = userId;
-        this.bookingId = bookingId;
+        this.offerId = offerId;
         this.comment = comment;
     }
 }

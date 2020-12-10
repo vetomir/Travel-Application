@@ -28,7 +28,7 @@ public class Comment extends Audit {
     private AppUser appUser;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "booking_id", updatable = false)
-    private Booking booking;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "offer_id", updatable = false)
+    private Offer offer;
 }

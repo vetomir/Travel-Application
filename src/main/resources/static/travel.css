@@ -69,7 +69,7 @@ body{
     background: #fff;
 }
 #cover{
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 #menu nav{
@@ -189,7 +189,7 @@ body{
     box-sizing: border-box;
 }
 .search form div{
-    margin-right: 2rem;
+    margin-right: 1rem;
 }
 .search form button{
     border-radius: 20px;
@@ -427,8 +427,9 @@ body{
     background: url("https://images.unsplash.com/photo-1518410240146-36aeeed0e4f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80") no-repeat #111111;
     background-size: cover;
     padding: 0 3rem;
+    margin-top: 3rem;
     box-sizing: border-box;
-    border-radius: 20px 20px 0 0;
+    border-radius: 50px 50px 0 0;
 }
 #footer #subscribe{
     display: flex;
@@ -516,6 +517,11 @@ body{
     align-items: center;
     width: 30%;
 }
+.form form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .form h1{
     color: white;
 }
@@ -559,6 +565,44 @@ body{
 }
 .form p{
     text-align: center;
+}
+.user-modal{
+    background: #111;
+    border-radius: 20px;
+}
+.user-modal div{
+    padding: 0 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.user-modal div a{
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 1.5rem 3rem;
+    width: auto;
+    margin: 2rem 2rem 0 2rem;
+    border-radius: 20px;
+    border: 3px solid #fff;
+    background: #111;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.user-modal div a:hover{
+    text-decoration: none;
+    background: #fff;
+    color: #111;
+}
+.user-modal div .logout{
+    font-size: 1.1rem;
+    border-color: #FCAF45;
+    color: #FCAF45;
+}
+.user-modal div .logout:hover{
+    color: #111;
+    background: #FCAF45;
 }
 .off-canvas {
     background: #111;

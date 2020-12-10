@@ -48,7 +48,7 @@ class AppUserServiceImpl implements AppUserService{
 
     public UserReadModel registerAppUser(UserWriteModel userWriteModel, HttpServletRequest request){
         AppUser appUser = createAppUser(userWriteModel);
-        createToken(appUser,request);
+        /*createToken(appUser,request);*/
         return AppUserFactory.toDto(appUser);
     }
 

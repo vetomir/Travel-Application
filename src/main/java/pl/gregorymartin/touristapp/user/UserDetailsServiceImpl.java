@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 @Service
 @Primary
 class UserDetailsServiceImpl implements UserDetailsService {
-    Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     private AppUserRepository repository;
 
@@ -21,6 +20,7 @@ class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(final String s) throws UsernameNotFoundException {
+
         return repository.findAllByUsername(s);
     }
 }

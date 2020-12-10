@@ -5,7 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -31,7 +33,12 @@ class Offer {
     @JoinColumn(name = "offer_id",  insertable = false)
     Set<Booking> bookings = new HashSet<>();
 
-    Offer() {
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "offer_id",  insertable = false)
+    private List<Comment> comments = new ArrayList<>();
+
+    public Offer() {
     }
 
     Offer(final long id) {

@@ -18,6 +18,7 @@ class CommentRestController {
     CommentRestController(final CommentService commentService) {
         this.commentService = commentService;
     }
+
     @GetMapping("/list")
     ResponseEntity<List<CommentReadModel>> readAllComments(@RequestParam(required = false) Integer page, Sort.Direction sort, String sortBy
             /*@AuthenticationPrincipal UsernamePasswordAuthenticationToken user*/){
@@ -27,6 +28,7 @@ class CommentRestController {
 
         return ResponseEntity.ok(commentService.getAllComments(pageNumber, sortDirection, sortByVariable, 25));
     }
+
 
 
 }

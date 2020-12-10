@@ -10,12 +10,8 @@ import java.time.ZonedDateTime;
 @Setter
 @Builder
 public
-class CommentReadModel {
-    private long id;
-    private String name;
-    private String userAvatar;
+class CommentUserPanel {
+    private long offerId;
     private String comment;
-    private ZonedDateTime createdOn;
-
-
+    private String createdOn;
 }

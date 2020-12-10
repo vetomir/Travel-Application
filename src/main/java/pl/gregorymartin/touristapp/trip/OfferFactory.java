@@ -1,9 +1,10 @@
 package pl.gregorymartin.touristapp.trip;
 
-import pl.gregorymartin.touristapp.trip.dto.OfferMvcHomepage;
+import pl.gregorymartin.touristapp.trip.dto.OfferSearch;
 import pl.gregorymartin.touristapp.trip.dto.OfferReadModel;
 import pl.gregorymartin.touristapp.trip.dto.OfferWriteModel;
 
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,20 +50,25 @@ class OfferFactory {
                 .build();
     }
 
-    //
-    public static List<OfferMvcHomepage> toMvcDto(List<Offer> offer) {
+    // MVC
+    public static List<OfferSearch> toOfferSearch(List<Offer> offer) {
         return offer.stream()
-                .map(OfferFactory::toMvcDto)
+                .map(OfferFactory::toOfferSearch)
                 .collect(Collectors.toList());
     }
 
-    public static OfferMvcHomepage toMvcDto(Offer offer) {
-        return OfferMvcHomepage.builder()
+    public static OfferSearch toOfferSearch(Offer offer) {
+        int days = (int) ChronoUnit.DAYS.between(offer.getDepartureTime(), offer.getArrivingTime());
+
+        return OfferSearch.builder()
                 .departureCityName(offer.getDepartureCityName())
                 .departureTime(offer.getDepartureTime())
                 .arrivingCityName(offer.getArrivingCityName())
+                .arrivingTime(offer.getArrivingTime())
                 .arrivingCityPhotoUrl(offer.getArrivingCityPhotoUrl())
                 .price(offer.getPrice())
+                .days(days)
                 .build();
     }
+
 }
