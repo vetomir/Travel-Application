@@ -11,152 +11,16 @@
     <link href="../static/travel.css" th:href="@{/travel.css}" rel="stylesheet" />
     <link href="../static/review.css" th:href="@{/review.css}" rel="stylesheet" />
 </head>
-<body>
-    <div id="cover">
-        <div id="menu" uk-sticky="sel-target: .uk-navbar-container; bottom: #transparent-sticky-navbar">
-            <div class="uk-position-top">
-                <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar="dropbar: true;">
-                    <div class="content">
-                        <div class="uk-navbar-left menu-left">
-                            <ul class="uk-navbar-nav">
-                                <li><a id="logo" th:href="@{/}">Travello</a></li>
-                            </ul>
-                        </div>
-                        <div class="uk-navbar-right menu-right">
-                            <ul class="uk-navbar-nav">
-                                <li><a href="#" uk-icon="lock" uk-toggle="target: #offcanvas-login"></a></li>
-                                <li><a href="#" uk-icon="user" uk-toggle="target: #offcanvas-panel"></a></li>
-                                <li><a href="#" uk-icon="menu" uk-toggle="target: #offcanvas-menu"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-        <div id="offcanvas-login" uk-modal>
-
-            <form class="form uk-modal-dialog uk-modal-body" action="#" th:action="@{/login}" method="post">
-                <button class="uk-modal-close-default" type="button" uk-close></button>
-                <h1>Login Page</h1>
-                <label>Email</label>
-                <input name="username" type="text" placeholder="Email">
-                <label>Password</label>
-                <input name="password" type="password" placeholder="Password">
-                <button type="submit" value="Login" class="login">Login</button>
-                <p>Register <a uk-toggle="target: #offcanvas-register">New Account</a></p>
+<body >
+    <div class="review-bg" th:style="|background:url( ${offer.cityPhotoUrl} );|"></div>
+    <div class="review-bg-shadow"></div>
+    <div id="cover" >
+        <div id="review">
+            <h1>Review Your trip</h1>
+            <form class="form" method="post" th:action="|@{/booking/review/}${offerId}/add|" th:object="${review}">
+                <textarea type="text" th:field="*{comment}"></textarea>
+                <button type="submit" >Submit</button>
             </form>
-        </div>
-        <div id="offcanvas-panel" uk-modal>
-            <div class="user-modal uk-modal-dialog uk-modal-body">
-                <button class="uk-modal-close-default" type="button" uk-close></button>
-                <div>
-                    <a href="#" th:href="|@{/users?id=1/bookings}|">My Bookings</a>
-                    <a href="#" th:href="|@{/users?id=1/my-account}|">My Account</a>
-                    <a class="logout" href="#" th:href="@{/logout}">Log Out</a>
-                </div>
-
-            </div>
-        </div>
-        <div id="offcanvas-register" uk-modal>
-
-
-            <div class="form uk-modal-dialog uk-modal-body">
-                <button class="uk-modal-close-default" type="button" uk-close></button>
-                <h1>Sign In Page</h1>
-                <form method="post" th:action="@{/register}" th:object="${userWriteModel}">
-
-                    <label>Email</label>
-                    <input th:field ="*{username}" type="email" placeholder="Email Address">
-                    <label>Name</label>
-                    <input th:field ="*{name}" type="text" placeholder="Name">
-                    <label>Surname</label>
-                    <input th:field ="*{surname}" type="text" placeholder="Surname">
-                    <br>
-                    <p>--------------------------</p>
-                    <label>Password</label>
-                    <input th:field="*{password}" type="password" placeholder="Password">
-                    <label>Repeat password</label>
-                    <input th:field="*{password2}" type="password" placeholder="Repeat password">
-                    <button class="login">Submit</button>
-                </form>
-            </div>
-        </div>
-        <div id="offcanvas-menu" uk-offcanvas="mode: reveal; overlay: true; flip: true;">
-            <div class="off-canvas uk-offcanvas-bar uk-flex uk-flex-column">
-
-                <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
-                    <li class="option uk-active"><a href="#">Home</a></li>
-                    <li class="option"><a href="#">About us</a></li>
-                    <li class="option"><a href="#">Contact us</a></li>
-                </ul>
-
-            </div>
-        </div>
-        <div id="header">
-            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="animation: fade; autoplay: true">
-                <ul class="uk-slideshow-items">
-                    <li>
-                        <div class="cover">
-                            <p>Widziałem orła cień</p>
-                            <h1>Visit Spain</h1>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1516911046066-db186f021455?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80" alt="" uk-cover>
-                    </li>
-                    <li>
-                        <div class="cover">
-                            <div class="cover">
-                                <p>Widziałem orła cień</p>
-                                <h1>Check France</h1>
-                            </div>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1556887444-19bd1175d354?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80" alt="" uk-cover>
-                    </li>
-                    <li>
-                        <div class="cover">
-                            <p>Widziałem orła cień</p>
-                            <h1>Discover Russia</h1>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1528628226822-6f38ca9687c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="" uk-cover>
-                    </li>
-                </ul>
-
-                <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-                <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-
-            </div>
-
-            <div id="review">
-                <h1>Review Your trip</h1>
-                <form class="form" method="post" th:action="|@{/booking/review/}${offerId}/add|" th:object="${review}">
-                    <p th:text="${offer.id}"></p>
-                    <p th:text="${offer.departureCityName}"></p>
-                    <p th:text="${offer.arrivingCityName}"></p>
-                    <p th:text="${offer.departureTime}"></p>
-                    <p>---------------------------------</p>
-                    <input type="text" th:field="*{comment}">
-                    <button type="submit" >Submit</button>
-                </form>
-            </div>
-        </div>
-        <div id="footer">
-            <div id="subscribe">
-                <h1>
-                    Subscribe <br> to Our Newsletter
-                </h1>
-                <div>
-                    <input />
-                    <button>Subscribe</button>
-                </div>
-
-            </div>
-            <div class="footer-belt">
-                <h1 class="logo">Travello</h1>
-                <div class="social">
-                    <li><a href="#" uk-icon="facebook"></a></li>
-                    <li><a href="#" uk-icon="instagram"></a></li>
-                    <li><a href="#" uk-icon="youtube"></a></li>
-                </div>
-            </div>
         </div>
     </div>
 

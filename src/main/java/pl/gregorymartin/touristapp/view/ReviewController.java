@@ -6,12 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.gregorymartin.touristapp.trip.CommentService;
 import pl.gregorymartin.touristapp.trip.TripService;
-import pl.gregorymartin.touristapp.trip.dto.CommentReadModel;
 import pl.gregorymartin.touristapp.trip.dto.CommentWriteModel;
 import pl.gregorymartin.touristapp.user.AppUser;
 import pl.gregorymartin.touristapp.user.dto.UserWriteModel;
-
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/booking/review")

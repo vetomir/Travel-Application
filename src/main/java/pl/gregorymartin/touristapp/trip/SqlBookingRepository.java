@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public
-interface SqlBookingRepository extends JpaRepository<Booking, Long> {
+interface SqlBookingRepository extends BookingRepository, JpaRepository<Booking, Long> {
 
     List<Booking> findAllByAppUser_IdOrderByIdDesc(long userId);
 

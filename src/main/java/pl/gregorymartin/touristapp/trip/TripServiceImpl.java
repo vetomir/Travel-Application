@@ -18,52 +18,53 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-class TripServiceImpl implements TripService{
+class TripServiceImpl implements TripService {
     private Logger logger = LoggerFactory.getLogger(TripService.class);
 
-    private SqlBookingRepository bookingRepository;
-    private SqlOfferRepository offerRepository;
+    private BookingRepository bookingRepository;
+    private OfferRepository offerRepository;
     private CityRepository cityRepository;
     private AppUserRepository appUserRepository;
 
-    TripServiceImpl(final SqlBookingRepository bookingRepository, final SqlOfferRepository offerRepository, final CityRepository cityRepository, final AppUserRepository appUserRepository) {
+    TripServiceImpl(final BookingRepository bookingRepository, final OfferRepository offerRepository, final CityRepository cityRepository, final AppUserRepository appUserRepository) {
         this.bookingRepository = bookingRepository;
         this.offerRepository = offerRepository;
         this.cityRepository = cityRepository;
         this.appUserRepository = appUserRepository;
     }
 
-    public List<OfferReadModel> getAllOffers(int page, Sort.Direction sort, String sortBy, int items){
+    public List<OfferReadModel> getAllOffers(int page, Sort.Direction sort, String sortBy, int items) {
         List<Offer> offers = offerRepository.findAll(
                 PageRequest.of(page, items,
                         Sort.by(sort, sortBy)
                 )).getContent();
         return OfferFactory.toDto(offers);
     }
-    public List<String> availableCitiesToArrive(){
-        List<Offer> offers = offerRepository.findAll();
 
-        return offers.stream().map(Offer::getArrivingCityName).distinct().collect(Collectors.toList());
-    }
-    public List<String> availableCitiesToDeparture(){
-        List<Offer> offers = offerRepository.findAll();
+    public List<String> availableCitiesToArrive() {
 
-        return offers.stream().map(Offer::getDepartureCityName).distinct().collect(Collectors.toList());
+        return offerRepository.availableCitiesToArrive().stream().distinct().collect(Collectors.toList());
     }
 
-    public List<OfferSearch> searchOffers(String from, String to, ZonedDateTime when){
+    public List<String> availableCitiesToDeparture() {
+        return offerRepository.availableCitiesToDeparture().stream().distinct().collect(Collectors.toList());
+    }
 
-        if(to.equals(from)){
+    public List<OfferSearch> searchOffers(String from, String to, ZonedDateTime when) {
+
+        if (to.equals(from)) {
             throw new IllegalArgumentException("Wrong query");
         }
-        if (to.equals("Anywhere")){
-            return OfferFactory.toOfferSearch(offerRepository.searchOffersWithoutTo(from,when));
+        if (to.equals("Anywhere")) {
+            return OfferFactory.toOfferSearch(offerRepository.searchOffersWithoutTo(from, when));
         }
-        if(from.equals("Anywhere")){
-            return OfferFactory.toOfferSearch(offerRepository.searchOffersWithoutFrom(to,when));
+        if (from.equals("Anywhere")) {
+            if (from.equals("Anywhere")) {
+                return OfferFactory.toOfferSearch(offerRepository.searchOffersWithoutFrom(to, when));
+            } else
+                return OfferFactory.toOfferSearch(offerRepository.searchOffers(from, to, when));
         }
-        else
-            return OfferFactory.toOfferSearch(offerRepository.searchOffers(from,to,when));
+        return null;
     }
     public List<BookingUserPanel> getFutureBookingsByUser(long userId){
         List<Booking> bookings = bookingRepository.findAllByUserIdAndSortByDepartureDateFuture(userId, ZonedDateTime.now());
@@ -75,7 +76,7 @@ class TripServiceImpl implements TripService{
     }
 
     public List<OfferSearch> getTopOffers(int page, Sort.Direction sort, String sortBy, int items){
-        List<Offer> offers = offerRepository.findAll(
+        List<Offer> offers = offerRepository.findAllNotExpired(
                 PageRequest.of(page, items,
                         Sort.by(sort, sortBy)
                 )).getContent();

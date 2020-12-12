@@ -3,7 +3,6 @@ package pl.gregorymartin.touristapp.trip;
 import pl.gregorymartin.touristapp.trip.dto.BookingReadModel;
 import pl.gregorymartin.touristapp.trip.dto.BookingUserPanel;
 import pl.gregorymartin.touristapp.trip.dto.BookingWriteModel;
-import pl.gregorymartin.touristapp.trip.dto.CommentUserPanel;
 import pl.gregorymartin.touristapp.user.AppUserFactory;
 
 import java.util.List;

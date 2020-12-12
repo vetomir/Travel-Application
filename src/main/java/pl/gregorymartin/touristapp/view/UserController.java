@@ -1,5 +1,7 @@
 package pl.gregorymartin.touristapp.view;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import pl.gregorymartin.touristapp.trip.*;
+import pl.gregorymartin.touristapp.trip.CommentFactory;
+import pl.gregorymartin.touristapp.trip.CommentService;
+import pl.gregorymartin.touristapp.trip.TripService;
 import pl.gregorymartin.touristapp.trip.dto.BookingUserPanel;
 import pl.gregorymartin.touristapp.user.AppUser;
 import pl.gregorymartin.touristapp.user.AppUserFactory;
@@ -16,13 +20,12 @@ import pl.gregorymartin.touristapp.user.AppUserService;
 import pl.gregorymartin.touristapp.user.dto.UserWriteModel;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
 class UserController {
+
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final AppUserService userService;
     private final CommentService commentService;
     private final TripService tripService;
@@ -105,7 +108,13 @@ class UserController {
 
 
 
-        model.addAttribute("comments", CommentFactory.toCommentUserPanel(commentService.getCommentByUser(appUser.getId())));
+        try{
+            model.addAttribute("comments", CommentFactory.toCommentUserPanel(commentService.getCommentByUser(appUser.getId())));
+        }
+        catch (Exception e){
+            logger.info(e.getMessage());
+        }
+
 
         return "user-panel";
     }

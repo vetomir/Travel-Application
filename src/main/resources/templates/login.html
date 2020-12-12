@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+
+<link href="../static/travel.css" th:href="@{/travel.css}" rel="stylesheet" />
+<link href="../static/login.css" th:href="@{/login.css}" rel="stylesheet" />
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -29,7 +32,7 @@
 </body>-->
 <body>
 <div>
-    <h1>Login Page</h1>
+    <h1 class="login-info">Login Page</h1>
 
     <form class="form" th:action="@{/login}" method="post">
 
@@ -41,8 +44,10 @@
         <!--<input class="form-input" type="password" id="password" name="password" placeholder="Password" th:errorclass="'input-warn'"/>-->
         <input class="form-input" type="password" id="password" name="password"/>
 
-        <input type="checkbox" id="remember-me" name="remember-me"/>
-
+        <div class="form-remember-me">
+            <p>Remember me</p>
+            <input type="checkbox" id="remember-me" name="remember-me"/>
+        </div>
 
         <input class="form-submit" type="submit" value="Login">
 

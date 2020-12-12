@@ -3,7 +3,6 @@ package pl.gregorymartin.touristapp.trip.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import pl.gregorymartin.touristapp.user.dto.UserReadModel;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,7 +1,7 @@
 package pl.gregorymartin.touristapp.trip;
 
-import pl.gregorymartin.touristapp.trip.dto.OfferSearch;
 import pl.gregorymartin.touristapp.trip.dto.OfferReadModel;
+import pl.gregorymartin.touristapp.trip.dto.OfferSearch;
 import pl.gregorymartin.touristapp.trip.dto.OfferWriteModel;
 
 import java.time.temporal.ChronoUnit;
@@ -46,6 +46,7 @@ class OfferFactory {
                 .departureTime(offer.getDepartureTime())
                 .capacity(offer.getCapacity())
                 .price(offer.getPrice())
+                .cityPhotoUrl(offer.getArrivingCityPhotoUrl())
                 .bookings(BookingFactory.toDto(new ArrayList<>(offer.getBookings())))
 
                 .build();

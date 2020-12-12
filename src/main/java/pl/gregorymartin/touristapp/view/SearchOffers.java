@@ -1,5 +1,7 @@
 package pl.gregorymartin.touristapp.view;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.gregorymartin.touristapp.trip.TripService;
+import pl.gregorymartin.touristapp.trip.dto.OfferSearch;
 import pl.gregorymartin.touristapp.user.dto.UserWriteModel;
 import pl.gregorymartin.touristapp.view.dto.SearchMVC;
 
@@ -15,10 +18,12 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 class SearchOffers {
     private final TripService tripService;
+    private final Logger logger = LoggerFactory.getLogger(SearchOffers.class);
 
     SearchOffers(final TripService tripService) {
         this.tripService = tripService;
@@ -41,12 +46,19 @@ class SearchOffers {
         model.addAttribute("contentDesc", "From " + from + " To " + to );
 
         ZonedDateTime when = date.toInstant().atZone(ZoneId.systemDefault());
+        List<OfferSearch> offerSearches;
         try{
-            model.addAttribute("offersList", tripService.searchOffers(from,to, when));
+            offerSearches = tripService.searchOffers(from, to, when);
+
         }catch (IllegalArgumentException e){
+            logger.warn(e.getMessage());
+            return "redirect:/";
+        }
+        if(offerSearches.size() <= 0){
             return "redirect:/";
         }
 
+        model.addAttribute("offersList", offerSearches);
 
         return "search";
     }

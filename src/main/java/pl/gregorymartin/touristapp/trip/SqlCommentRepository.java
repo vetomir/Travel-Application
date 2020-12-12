@@ -4,12 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface SqlCommentRepository extends JpaRepository<Comment, Long> {
+interface SqlCommentRepository extends CommentRepository, JpaRepository<Comment, Long> {
 
     @Query("Select r From Comment r where r.appUser.id = ?1 and r.offer.id = ?2")
     Optional<Comment> findCommentByUserAndOffer(long userId, long offerId);

@@ -13,7 +13,6 @@ import pl.gregorymartin.touristapp.trip.dto.OfferSearch;
 import pl.gregorymartin.touristapp.user.dto.UserWriteModel;
 import pl.gregorymartin.touristapp.view.dto.SearchMVC;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller

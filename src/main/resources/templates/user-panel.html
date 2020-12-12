@@ -190,12 +190,12 @@
                 </div>
             </div>
 
-            <div class="user-comments">
+<!--            <div th:if="${comments} != null" class="user-comments">
                 <div class="user-comments" th:each="comment : ${comments}">
-                    <p th:text="${comment.createdOn}"></p>
                     <p th:text="${comment.comment}"></p>
+                    <p th:text="${comment.createdOn}"></p>
                 </div>
-            </div>
+            </div>-->
         </div>
 
         <div id="footer">

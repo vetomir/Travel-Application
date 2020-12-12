@@ -22,6 +22,7 @@ class OfferReadModel {
 
     private int capacity;
     private double price;
+    private String cityPhotoUrl;
 
     private List<BookingReadModel> bookings;
 

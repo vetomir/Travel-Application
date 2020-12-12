@@ -4,14 +4,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import pl.gregorymartin.touristapp.trip.TripService;
 import pl.gregorymartin.touristapp.trip.dto.BookingWriteModel;
 import pl.gregorymartin.touristapp.user.AppUser;
-import pl.gregorymartin.touristapp.user.AppUserFactory;
 import pl.gregorymartin.touristapp.user.dto.UserWriteModel;
 
-import javax.servlet.http.HttpServletRequest;
+
 import javax.validation.Valid;
 
 @Controller
@@ -54,13 +52,16 @@ class BookingController {
             @Valid BookingWriteModel bookingWriteModel,
             Authentication authentication
     ) {
+        if(authentication == null){
+            return "redirect:/login";
+        }
         AppUser appUser = (AppUser) authentication.getPrincipal();
         bookingWriteModel.setUserId(appUser.getId());
 
         bookingWriteModel.setOfferId(offerId);
 
         tripService.addBooking(bookingWriteModel);
-        return "redirect:/";
+        return "redirect:/users/panel";
     }
 
     @PostMapping("/pay/{id}")

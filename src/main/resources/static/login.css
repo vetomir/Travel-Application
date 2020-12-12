@@ -1,0 +1,58 @@
+body{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: url(https://images.unsplash.com/photo-1488342994276-7c3bc0742042?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80);
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
+}
+.login-info{
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 0.5rem black;
+}
+.form{
+    width: 100%;
+    box-sizing: border-box;
+}
+.form > input{
+    width: 50%;
+}
+.form input{
+    width: auto;
+}
+.form .form-input{
+    margin-bottom: 1rem;
+}
+.form .form-submit{
+    width: auto;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 1.5rem 3rem;
+    margin: 2rem 2rem 0 2rem;
+    border-radius: 20px;
+    border: 3px solid #FCAF45;
+    background: #111;
+    color: #FCAF45;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.form .form-submit:hover {
+    background: #FCAF45;
+    color: #111;
+    border-color: #FCAF45;
+    animation-duration: .5s;
+    animation-name: yellow-button-subscribe;
+    animation-fill-mode: forwards;
+}
+.form .form-remember-me{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: baseline;
+}
+.form .terms{
+    width: 17rem;
+}
