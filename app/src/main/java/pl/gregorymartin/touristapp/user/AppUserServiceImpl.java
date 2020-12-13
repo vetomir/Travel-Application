@@ -15,7 +15,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public
 class AppUserServiceImpl implements AppUserService{
     private final AppUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
