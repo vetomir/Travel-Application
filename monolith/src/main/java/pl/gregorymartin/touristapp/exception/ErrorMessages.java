@@ -1,5 +1,5 @@
 package pl.gregorymartin.touristapp.exception;
-
+/*
 import lombok.Getter;
 
 @Getter
@@ -21,4 +21,4 @@ public enum ErrorMessages {
         this.errorMessage = errorMessage;
     }
 
-}
+}*/

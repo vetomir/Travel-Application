@@ -19,11 +19,11 @@ class Warmup implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(final ContextRefreshedEvent contextRefreshedEvent) {
-        putUsers();
+        loadUsers();
 
     }
 
-    private void putUsers() {
+    private void loadUsers() {
         List<UserWriteModel> users = new ArrayList<>();
 
         users.add(new UserWriteModel("staszex","Tytus","Kowalski", "abc123","abc123"));

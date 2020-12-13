@@ -1,4 +1,4 @@
-package pl.gregorymartin.touristapp.exception;
+/*package pl.gregorymartin.touristapp.exception;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,4 +18,4 @@ public class ErrorDetails {
         this.message = message;
         this.causePath = causePath;
     }
-}
+}*/

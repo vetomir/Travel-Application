@@ -28,13 +28,13 @@ class Warmup implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(final ContextRefreshedEvent contextRefreshedEvent) {
-        putOffers();
-        putBookings();
-        putComments();
+        loadOffers();
+        loadBookings();
+        loadComments();
 
     }
 
-    void putOffers(){
+    void loadOffers(){
         List<OfferWriteModel> offers = new ArrayList<>();
 
 
@@ -83,7 +83,7 @@ class Warmup implements ApplicationListener<ContextRefreshedEvent> {
 
     }
 
-    void putBookings(){
+    void loadBookings(){
         List<BookingWriteModel> bookings = new ArrayList<>();
 
         bookings.add(new BookingWriteModel(1, 1, 2));
@@ -114,7 +114,7 @@ class Warmup implements ApplicationListener<ContextRefreshedEvent> {
         tripService.setPaid(1,4);*/
     }
     @Lazy
-    void putComments(){
+    void loadComments(){
         List<CommentWriteModel> comments = new ArrayList<>();
         comments.add(new CommentWriteModel(1L,1L,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac nulla tincidunt, tincidunt quam et, pellentesque felis. Fusce eu ligula arcu. Proin ultricies blandit elit sit amet aliquet. Mauris porta enim et metus tincidunt dictum. Fusce eleifend augue diam, feugiat pretium orci gravida vitae"));
         comments.add(new CommentWriteModel(2L,2L,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac nulla tincidunt, tincidunt quam et, pellentesque felis. Fusce eu ligula arcu. Proin ultricies blandit elit sit amet aliquet. Mauris porta enim et metus tincidunt dictum. Fusce eleifend augue diam, feugiat pretium orci gravida vitae"));

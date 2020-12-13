@@ -20,11 +20,11 @@ class Warmup implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(final ContextRefreshedEvent contextRefreshedEvent) {
-        putPlaces();
+        loadPlaces();
 
     }
 
-    void putPlaces(){
+    void loadPlaces(){
         List<CityWriteModel> cities = new ArrayList<>();
 
         cities.add(new CityWriteModel("Warsaw","https://images.unsplash.com/photo-1601469762504-91a427fc6472?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1398&q=80","Poland"));
